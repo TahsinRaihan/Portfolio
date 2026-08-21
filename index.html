@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tahsin Raihan Robbani — CSE Researcher &amp; Systems Engineer</title>
+<meta name="description" content="Portfolio of Tahsin Raihan Robbani — BRAC University CSE, Student Tutor, Neuro-Symbolic AI researcher.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<style>
+:root{
+  --void:#030712;
+  --void-2:#050811;
+  --glass: rgba(15,23,42,0.7);
+  --glass-strong: rgba(15,23,42,0.9);
+  --line: rgba(56,189,248,0.15);
+  --line-strong: rgba(56,189,248,0.35);
+  --cyan:#00F5FF;
+  --emerald:#10B981;
+  --text-hi:#E7F6FF;
+  --text-mid:#93A6BF;
+  --text-low:#5C7089;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgba(0,245,255,0.05), transparent 60%),
+    radial-gradient(1000px 500px at 100% 10%, rgba(16,185,129,0.04), transparent 60%),
+    var(--void);
+  color:var(--text-hi);
+  font-family:var(--font-body);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--cyan);color:#000;}
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-track{background:var(--void);}
+::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:4px;}
+
+/* ambient grid */
+.grid-bg{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(56,189,248,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,0.045) 1px, transparent 1px);
+  background-size:48px 48px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, black 20%, transparent 75%);
+}
+.spotlight{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background: radial-gradient(600px at var(--x,50%) var(--y,20%), rgba(0,245,255,0.07), transparent 80%);
+  transition: background .1s linear;
+}
+.scanline{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.025;
+  background:repeating-linear-gradient(0deg,#fff 0px,#fff 1px,transparent 1px,transparent 3px);}
+
+a{color:inherit;text-decoration:none;}
+.mono{font-family:var(--font-mono);}
+.container{max-width:1180px;margin:0 auto;padding:0 28px;}
+.eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);opacity:.85;}
+.section{position:relative;z-index:3;padding:110px 0;border-top:1px solid var(--line);}
+.section h2{font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:600;letter-spacing:-.01em;margin:10px 0 8px;}
+.section .lead{color:var(--text-mid);max-width:640px;font-size:1rem;line-height:1.6;margin-bottom:48px;}
+
+/* Nav / dock */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 28px;backdrop-filter:blur(14px);
+  background:linear-gradient(to bottom, rgba(3,7,18,.85), transparent);
+}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:.85rem;color:var(--text-hi);}
+.brand .dot{width:8px;height:8px;border-radius:50%;background:var(--emerald);box-shadow:0 0 10px var(--emerald);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.nav-links{display:flex;gap:26px;font-size:.82rem;color:var(--text-mid);}
+.nav-links a{transition:color .2s;}
+.nav-links a:hover{color:var(--cyan);}
+.kbd-btn{
+  display:flex;align-items:center;gap:8px;
+  border:1px solid var(--line);background:var(--glass);
+  padding:7px 12px;border-radius:8px;font-family:var(--font-mono);font-size:.75rem;color:var(--text-mid);
+  cursor:pointer;transition:.2s;
+}
+.kbd-btn:hover{border-color:var(--line-strong);color:var(--cyan);}
+.kbd-btn kbd{background:rgba(255,255,255,.06);padding:1px 6px;border-radius:4px;border:1px solid var(--line);}
+@media (max-width:860px){.nav-links{display:none;}}
+
+/* Mobile dock */
+.mobile-dock{
+  position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:50;
+  display:none;gap:4px;padding:8px;border-radius:20px;
+  background:rgba(15,23,42,.75);backdrop-filter:blur(16px);border:1px solid var(--line);
+}
+.mobile-dock a{padding:10px;border-radius:14px;color:var(--text-mid);display:flex;}
+.mobile-dock a.active,.mobile-dock a:hover{color:var(--cyan);background:rgba(0,245,255,.08);}
+@media (max-width:860px){.mobile-dock{display:flex;} body{padding-bottom:20px;}}
+
+/* Hero */
+.hero{
+  position:relative;z-index:3;min-height:100vh;display:flex;align-items:center;
+  padding:140px 0 80px;
+}
+.hero-grid{display:grid;grid-template-columns:1.3fr .9fr;gap:60px;align-items:center;}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:40px;}}
+.hero h1{
+  font-family:var(--font-display);font-weight:700;letter-spacing:-.02em;
+  font-size:clamp(2.4rem,5.2vw,4.2rem);line-height:1.03;margin:14px 0 18px;
+}
+.hero h1 .grad{
+  background:linear-gradient(90deg,var(--cyan),var(--emerald));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p.sub{color:var(--text-mid);font-size:1.08rem;max-width:520px;line-height:1.65;margin-bottom:30px;}
+.badge-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:34px;}
+.badge{
+  display:flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:.74rem;
+  border:1px solid var(--line);background:var(--glass);padding:7px 12px;border-radius:99px;color:var(--text-mid);
+}
+.badge .lit{width:6px;height:6px;border-radius:50%;background:var(--emerald);box-shadow:0 0 8px var(--emerald);}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+.btn{
+  font-family:var(--font-mono);font-size:.82rem;padding:13px 22px;border-radius:10px;
+  display:inline-flex;align-items:center;gap:8px;cursor:pointer;transition:.25s;border:1px solid transparent;
+}
+.btn-primary{background:linear-gradient(90deg,var(--cyan),#0ea5c8);color:#001217;font-weight:600;box-shadow:0 0 0 rgba(0,245,255,.4);}
+.btn-primary:hover{box-shadow:0 0 24px rgba(0,245,255,.35);transform:translateY(-1px);}
+.btn-ghost{border-color:var(--line);color:var(--text-hi);background:var(--glass);}
+.btn-ghost:hover{border-color:var(--line-strong);}
+
+.hero-portrait{position:relative;justify-self:center;}
+.portrait-frame{
+  position:relative;width:290px;height:360px;border-radius:18px;overflow:hidden;
+  border:1px solid var(--line-strong);
+  box-shadow:0 0 0 1px rgba(0,245,255,.05), 0 30px 80px rgba(0,0,0,.6);
+}
+.portrait-frame img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.05);}
+.portrait-frame::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 60%, rgba(3,7,18,.85));
+}
+.portrait-tag{
+  position:absolute;bottom:14px;left:14px;right:14px;z-index:2;
+  font-family:var(--font-mono);font-size:.68rem;color:var(--text-mid);
+  display:flex;justify-content:space-between;
+}
+.portrait-tag b{color:var(--emerald);}
+.corner{position:absolute;width:18px;height:18px;border-color:var(--cyan);opacity:.85;z-index:3;}
+.corner.tl{top:8px;left:8px;border-top:2px solid;border-left:2px solid;}
+.corner.tr{top:8px;right:8px;border-top:2px solid;border-right:2px solid;}
+.corner.bl{bottom:8px;left:8px;border-bottom:2px solid;border-left:2px solid;}
+.corner.br{bottom:8px;right:8px;border-bottom:2px solid;border-right:2px solid;}
+
+/* Glass card base */
+.card{
+  border:1px solid var(--line);background:var(--glass);border-radius:16px;padding:26px;
+  position:relative;transition:.3s;
+}
+.card:hover{border-color:var(--line-strong);transform:translateY(-2px);}
+.card::before{
+  content:'';position:absolute;inset:0;border-radius:16px;padding:1px;
+  background:linear-gradient(120deg,transparent, rgba(0,245,255,.25), transparent);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:.3s;
+}
+.card:hover::before{opacity:1;}
+
+/* Student Tutor spotlight */
+.st-spotlight{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line-strong);
+  border-radius:20px;overflow:hidden;background:linear-gradient(135deg, rgba(16,185,129,.06), rgba(0,245,255,.03));
+  position:relative;
+}
+@media (max-width:860px){.st-spotlight{grid-template-columns:1fr;}}
+.st-left{padding:44px;}
+.st-right{padding:44px;border-left:1px solid var(--line);}
+@media (max-width:860px){.st-right{border-left:none;border-top:1px solid var(--line);}}
+.st-tag{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:.7rem;
+  color:var(--emerald);border:1px solid rgba(16,185,129,.35);background:rgba(16,185,129,.08);
+  padding:6px 12px;border-radius:99px;margin-bottom:18px;
+}
+.st-left h3{font-family:var(--font-display);font-size:1.7rem;margin-bottom:10px;}
+.st-meta{color:var(--text-mid);font-size:.9rem;line-height:1.7;margin-bottom:22px;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.stat{border:1px solid var(--line);border-radius:12px;padding:16px;background:rgba(3,7,18,.4);}
+.stat .num{font-family:var(--font-mono);font-size:1.5rem;color:var(--cyan);}
+.stat .lbl{font-size:.72rem;color:var(--text-low);margin-top:4px;}
+.pedagogy-list{list-style:none;}
+.pedagogy-list li{
+  display:flex;gap:12px;padding:14px 0;border-bottom:1px dashed var(--line);font-size:.88rem;color:var(--text-mid);line-height:1.5;
+}
+.pedagogy-list li:last-child{border-bottom:none;}
+.pedagogy-list li i{color:var(--emerald);flex-shrink:0;margin-top:2px;width:16px;height:16px;}
+
+/* Domain chips */
+.domain-grid{display:flex;flex-wrap:wrap;gap:14px;}
+.domain-chip{
+  position:relative;display:flex;align-items:center;gap:10px;
+  border:1px solid var(--line);background:rgba(15,23,42,.55);backdrop-filter:blur(10px);
+  padding:14px 18px;border-radius:12px;font-size:.86rem;color:var(--text-mid);cursor:default;
+  transition:.3s;overflow:hidden;
+}
+.domain-chip i{width:17px;height:17px;color:var(--emerald);flex-shrink:0;transition:.3s;}
+.domain-chip::after{
+  content:attr(data-tel);position:absolute;bottom:-22px;left:18px;font-family:var(--font-mono);
+  font-size:.62rem;color:var(--cyan);opacity:0;transition:.3s;letter-spacing:.05em;
+}
+.domain-chip:hover{
+  border-color:var(--line-strong);color:var(--text-hi);transform:translateY(-3px);
+  box-shadow:0 8px 26px rgba(0,245,255,.1), inset 0 0 0 1px rgba(0,245,255,.1);
+  padding-bottom:24px;
+}
+.domain-chip:hover i{color:var(--cyan);filter:drop-shadow(0 0 6px var(--cyan));}
+.domain-chip:hover::after{opacity:.85;bottom:8px;}
+
+/* Research pipeline */
+.pipeline{
+  display:flex;align-items:stretch;gap:0;overflow-x:auto;padding-bottom:14px;margin:34px 0;
+}
+.pipe-stage{
+  flex:1;min-width:190px;border:1px solid var(--line);background:var(--glass);border-radius:14px;
+  padding:20px;position:relative;margin-right:34px;cursor:default;transition:.25s;
+}
+.pipe-stage:hover{border-color:var(--cyan);box-shadow:0 0 18px rgba(0,245,255,.12);}
+.pipe-stage:last-child{margin-right:0;}
+.pipe-stage::after{
+  content:'→';position:absolute;right:-28px;top:50%;transform:translateY(-50%);
+  color:var(--cyan);font-family:var(--font-mono);opacity:.6;font-size:1.1rem;
+}
+.pipe-stage:last-child::after{display:none;}
+.pipe-idx{font-family:var(--font-mono);font-size:.68rem;color:var(--text-low);}
+.pipe-stage h4{font-family:var(--font-display);font-size:.98rem;margin:8px 0 6px;}
+.pipe-stage p{font-size:.78rem;color:var(--text-mid);line-height:1.5;}
+.metric-row{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0;}
+.metric-chip{
+  font-family:var(--font-mono);font-size:.78rem;color:var(--emerald);
+  border:1px solid rgba(16,185,129,.3);background:rgba(16,185,129,.06);
+  padding:8px 14px;border-radius:99px;
+}
+.research-cta{
+  display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:24px;
+}
+
+/* Bento */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+@media (max-width:900px){.bento{grid-template-columns:1fr 1fr;}}
+@media (max-width:600px){.bento{grid-template-columns:1fr;}}
+.proj-card{display:flex;flex-direction:column;gap:14px;min-height:220px;}
+.proj-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.proj-icon{width:38px;height:38px;border-radius:10px;background:rgba(0,245,255,.08);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--cyan);}
+.proj-year{font-family:var(--font-mono);font-size:.68rem;color:var(--text-low);}
+.proj-card h4{font-family:var(--font-display);font-size:1.05rem;}
+.proj-card p{font-size:.82rem;color:var(--text-mid);line-height:1.55;flex-grow:1;}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;}
+.tag{font-family:var(--font-mono);font-size:.66rem;color:var(--text-mid);border:1px solid var(--line);padding:3px 8px;border-radius:6px;}
+.proj-expand{font-family:var(--font-mono);font-size:.72rem;color:var(--cyan);display:flex;align-items:center;gap:6px;}
+.proj-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:4px;}
+.proj-btn{
+  font-family:var(--font-mono);font-size:.68rem;display:inline-flex;align-items:center;gap:6px;
+  padding:8px 12px;border-radius:8px;cursor:pointer;border:1px solid var(--line);background:rgba(3,7,18,.5);
+  color:var(--text-mid);transition:.2s;flex:1;justify-content:center;
+}
+.proj-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+.proj-btn-ghost{color:var(--emerald);border-color:rgba(16,185,129,.3);}
+.proj-btn-ghost:hover{border-color:var(--emerald);color:var(--emerald);box-shadow:0 0 12px rgba(16,185,129,.15);}
+
+/* Timeline / academic */
+.timeline{border-left:1px solid var(--line);margin-left:8px;}
+.t-item{position:relative;padding:0 0 34px 30px;}
+.t-item::before{
+  content:'';position:absolute;left:-6px;top:4px;width:11px;height:11px;border-radius:50%;
+  background:var(--void);border:2px solid var(--cyan);box-shadow:0 0 10px rgba(0,245,255,.5);
+}
+.t-item .t-date{font-family:var(--font-mono);font-size:.7rem;color:var(--text-low);}
+.t-item h4{font-family:var(--font-display);font-size:1.05rem;margin:5px 0 4px;}
+.t-item p{font-size:.85rem;color:var(--text-mid);}
+.leader-card{margin-top:10px;}
+
+/* Credentials gallery */
+.cred-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+@media (max-width:760px){.cred-grid{grid-template-columns:repeat(2,1fr);}}
+.cred-item{
+  aspect-ratio:3/4;border:1px solid var(--line);border-radius:12px;background:var(--glass);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  cursor:pointer;transition:.25s;color:var(--text-mid);
+}
+.cred-item:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-3px);}
+.cred-item span{font-family:var(--font-mono);font-size:.7rem;text-align:center;padding:0 10px;}
+
+/* Contact / footer */
+.contact-console{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:40px;border:1px solid var(--line-strong);
+  border-radius:20px;padding:48px;background:linear-gradient(135deg, rgba(0,245,255,.04), rgba(16,185,129,.03));
+}
+@media (max-width:820px){.contact-console{grid-template-columns:1fr;padding:32px;}}
+.contact-line{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px dashed var(--line);}
+.contact-line:last-child{border-bottom:none;}
+.contact-line .label{font-family:var(--font-mono);font-size:.72rem;color:var(--text-low);}
+.contact-line .value{font-family:var(--font-mono);font-size:.88rem;color:var(--text-hi);}
+.copy-btn{border:1px solid var(--line);background:transparent;color:var(--text-mid);padding:6px 8px;border-radius:6px;cursor:pointer;}
+.copy-btn:hover{color:var(--cyan);border-color:var(--cyan);}
+.status-panel{display:flex;flex-direction:column;gap:14px;justify-content:center;}
+.status-row{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:.8rem;color:var(--text-mid);}
+.status-row .lit{width:7px;height:7px;border-radius:50%;background:var(--emerald);box-shadow:0 0 8px var(--emerald);}
+footer{padding:36px 0;text-align:center;color:var(--text-low);font-family:var(--font-mono);font-size:.72rem;border-top:1px solid var(--line);position:relative;z-index:3;}
+
+/* Modal */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(3,7,18,.75);backdrop-filter:blur(6px);z-index:100;
+  display:none;align-items:center;justify-content:center;padding:20px;
+}
+.modal-overlay.open{display:flex;}
+.modal{
+  width:100%;max-width:640px;max-height:82vh;overflow-y:auto;background:var(--glass-strong);
+  border:1px solid var(--line-strong);border-radius:18px;padding:36px;position:relative;
+  animation:modalIn .25s ease;
+}
+@keyframes modalIn{from{opacity:0;transform:translateY(14px) scale(.98);}to{opacity:1;transform:none;}}
+.modal-close{position:absolute;top:18px;right:18px;color:var(--text-mid);cursor:pointer;background:none;border:none;}
+.modal-close:hover{color:var(--cyan);}
+.modal h3{font-family:var(--font-display);font-size:1.4rem;margin-bottom:6px;}
+.modal .modal-meta{font-family:var(--font-mono);font-size:.72rem;color:var(--text-low);margin-bottom:20px;}
+.modal p{font-size:.9rem;color:var(--text-mid);line-height:1.7;margin-bottom:14px;}
+.modal ul{margin:0 0 14px 18px;color:var(--text-mid);font-size:.87rem;line-height:1.7;}
+.video-sim{
+  position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;
+  background:radial-gradient(circle at 50% 50%, #0a1a1c, #020506 75%);border:1px solid var(--line-strong);
+}
+.video-scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,245,255,.04) 0px,transparent 2px,transparent 4px);animation:scanMove 4s linear infinite;}
+@keyframes scanMove{0%{background-position-y:0;}100%{background-position-y:40px;}}
+.video-box{position:absolute;border:2px solid var(--emerald);border-radius:4px;box-shadow:0 0 14px rgba(16,185,129,.5);animation:boxPulse 1.8s ease-in-out infinite;}
+.video-box span{position:absolute;top:-22px;left:0;font-family:var(--font-mono);font-size:.65rem;color:var(--emerald);background:rgba(3,7,18,.8);padding:2px 6px;border-radius:4px;}
+@keyframes boxPulse{0%,100%{opacity:.75;}50%{opacity:1;}}
+.video-hud{position:absolute;bottom:10px;left:10px;right:10px;display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.62rem;color:var(--cyan);opacity:.85;}
+.doc-viewer{width:100%;aspect-ratio:3/4;max-height:52vh;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#0a0e17;}
+.doc-viewer object,.doc-viewer iframe{width:100%;height:100%;border:none;}
+
+/* Command palette */
+.cmdk-overlay{
+  position:fixed;inset:0;z-index:200;background:rgba(3,7,18,.7);backdrop-filter:blur(4px);
+  display:none;align-items:flex-start;justify-content:center;padding-top:12vh;
+}
+.cmdk-overlay.open{display:flex;}
+.cmdk{width:100%;max-width:560px;background:var(--glass-strong);border:1px solid var(--line-strong);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6);}
+.cmdk input{
+  width:100%;background:transparent;border:none;border-bottom:1px solid var(--line);
+  padding:18px 20px;color:var(--text-hi);font-family:var(--font-mono);font-size:.95rem;outline:none;
+}
+.cmdk-list{max-height:320px;overflow-y:auto;padding:8px;}
+.cmdk-item{
+  display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;cursor:pointer;font-size:.86rem;color:var(--text-mid);
+}
+.cmdk-item:hover, .cmdk-item.sel{background:rgba(0,245,255,.08);color:var(--text-hi);}
+.cmdk-item .k-cat{margin-left:auto;font-family:var(--font-mono);font-size:.65rem;color:var(--text-low);}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+.reveal.show{opacity:1;transform:none;}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important;transition:none !important;}
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="spotlight" id="spotlight"></div>
+<div class="scanline"></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Tahsin Raihan Robbani <span style="color:var(--text-low);margin:0 2px;">//</span> Portfolio</div>
+  <nav class="nav-links">
+    <a href="#tutor">Experience</a>
+    <a href="#academic">Academic</a>
+    <a href="#domains">Research Interests</a>
+    <a href="#research">Research</a>
+    <a href="#projects">Projects</a>
+    <a href="#credentials">Credentials</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button class="kbd-btn" id="openCmdk"><i data-lucide="terminal" style="width:14px;height:14px"></i> Search <kbd>⌘K</kbd></button>
+</div>
+
+<!-- MOBILE DOCK -->
+<div class="mobile-dock">
+  <a href="#hero"><i data-lucide="home" style="width:18px;height:18px"></i></a>
+  <a href="#tutor"><i data-lucide="graduation-cap" style="width:18px;height:18px"></i></a>
+  <a href="#academic"><i data-lucide="school" style="width:18px;height:18px"></i></a>
+  <a href="#research"><i data-lucide="microscope" style="width:18px;height:18px"></i></a>
+  <a href="#projects"><i data-lucide="layout-grid" style="width:18px;height:18px"></i></a>
+  <a href="#contact"><i data-lucide="send" style="width:18px;height:18px"></i></a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">// CSE Undergraduate — BRAC University</div>
+      <h1>Tahsin Raihan<br><span class="grad">Robbani</span></h1>
+      <p class="sub">Computer Science &amp; Engineering researcher at BRAC University (CGPA 3.83/4.00) specializing in Neuro-Symbolic AI, Medical Computer Vision, and Systems Engineering. Published PyPI compiler developer and Student Tutor for Discrete Mathematics, dedicated to building interpretable, low-latency intelligent systems.</p>
+      <div class="badge-row">
+        <div class="badge"><span class="lit"></span> CGPA 3.83 / 4.00</div>
+        <div class="badge"><span class="lit"></span> Verified Student Tutor · CSE230</div>
+        <div class="badge"><span class="lit"></span> Research Active — Thesis 2025–26</div>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#research"><i data-lucide="cpu" style="width:15px;height:15px"></i> View Research</a>
+        <a class="btn btn-ghost" href="#contact"><i data-lucide="mail" style="width:15px;height:15px"></i> Contact Dispatch</a>
+        <a class="btn btn-ghost" id="downloadCv" href="#"><i data-lucide="download" style="width:15px;height:15px"></i> Download CV</a>
+      </div>
+    </div>
+    <div class="hero-portrait">
+      <div class="portrait-frame" id="portraitFrame">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <img src="./files/profile.jpg" alt="Tahsin Raihan Robbani" id="portraitImg">
+        <div class="portrait-tag"><span>ID// TRR-2026</span><span><b>●</b> ONLINE</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STUDENT TUTOR SPOTLIGHT -->
+<section class="section" id="tutor">
+  <div class="container">
+    <div class="eyebrow reveal">// Tier-1 Credential</div>
+    <h2 class="reveal">Work &amp; Experience</h2>
+    <p class="lead reveal">A competitively-appointed faculty role, not an extracurricular — official mentorship under the CSE department, spanning two consecutive terms.</p>
+
+    <div class="st-spotlight reveal">
+      <div class="st-left">
+        <div class="st-tag"><i data-lucide="badge-check" style="width:14px;height:14px"></i> VERIFIED APPOINTMENT</div>
+        <h3>Student Tutor (ST) — CSE230</h3>
+        <div class="st-meta">
+          BRAC University · Department of Computer Science and Engineering<br>
+          Discrete Mathematics · Spring 2026 &amp; Summer 2026<br>
+          Dhaka, Bangladesh
+        </div>
+        <div class="stat-grid">
+          <div class="stat"><div class="num">2</div><div class="lbl">Consecutive terms held</div></div>
+          <div class="stat"><div class="num">1:1</div><div class="lbl">& group consultations</div></div>
+          <div class="stat"><div class="num">CSE230</div><div class="lbl">Discrete Mathematics</div></div>
+          <div class="stat"><div class="num">Faculty</div><div class="lbl">Direct coordination</div></div>
+        </div>
+      </div>
+      <div class="st-right">
+        <ul class="pedagogy-list">
+          <li><i data-lucide="check-circle-2"></i> Competitively appointed by the CSE department to hold official tutoring authority for CSE230.</li>
+          <li><i data-lucide="check-circle-2"></i> Ran regular 1-on-1 and group consultation hours for undergraduate engineering students.</li>
+          <li><i data-lucide="check-circle-2"></i> Guided students through rigorous proofs, predicate logic, set theory, and graph theory algorithms.</li>
+          <li><i data-lucide="check-circle-2"></i> Formulated step-by-step problem-solving heuristics for recurring conceptual bottlenecks.</li>
+          <li><i data-lucide="check-circle-2"></i> Coordinated directly with course instructors to align sessions with lecture pace and pain points.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACADEMIC / LEADERSHIP -->
+<section class="section" id="academic">
+  <div class="container">
+    <div class="eyebrow reveal">// Academic Pedigree &amp; Leadership</div>
+    <h2 class="reveal">Prestigious Appointments &amp; History</h2>
+
+    <div class="st-spotlight reveal" style="grid-template-columns:1.1fr .9fr;">
+      <div class="st-left" style="padding:38px;">
+        <div class="timeline">
+          <div class="t-item">
+            <div class="t-date">SEP 2022 – SEP 2026 (EXPECTED)</div>
+            <h4>BRAC University, Dhaka</h4>
+            <p>BSc in Computer Science and Engineering — CGPA 3.83 / 4.00</p>
+          </div>
+          <div class="t-item">
+            <div class="t-date">2019 – 2021</div>
+            <h4>Notre Dame College, Dhaka</h4>
+            <p>Higher Secondary Certificate (HSC) — GPA 5.00 / 5.00</p>
+          </div>
+          <div class="t-item">
+            <div class="t-date">2019</div>
+            <h4>National Ideal School, Dhaka</h4>
+            <p>Secondary School Certificate (SSC) — GPA 5.00 / 5.00</p>
+          </div>
+        </div>
+      </div>
+      <div class="st-right" style="padding:38px;">
+        <div class="st-tag" style="color:var(--cyan);border-color:rgba(0,245,255,.35);background:rgba(0,245,255,.06);"><i data-lucide="users" style="width:14px;height:14px"></i> LEADERSHIP</div>
+        <h3 style="font-size:1.2rem;">NDITC Core Panel Member &amp; Organizer</h3>
+        <p class="st-meta">Notre Dame Information &amp; Technology Club · 2020 – 2021</p>
+        <ul class="pedagogy-list">
+          <li><i data-lucide="check-circle-2"></i> Managed event logistics, schedules, and technical infrastructure for "iNit 2.0," a national technology festival.</li>
+          <li><i data-lucide="check-circle-2"></i> Handled inter-school communications and crowd management as part of the core organizing panel.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH INTERESTS -->
+<section class="section" id="domains">
+  <div class="container">
+    <div class="eyebrow reveal">// 02. Research Interests &amp; Core Domains</div>
+    <h2 class="reveal">Research Interests</h2>
+    <p class="lead reveal">Cross-disciplinary interests spanning perception, reasoning, and the systems that make both run at scale.</p>
+
+    <div class="domain-grid reveal" id="domainGrid">
+      <div class="domain-chip" data-tel="01 / SIGNAL: HIGH"><i data-lucide="brain-circuit"></i><span>Artificial Intelligence</span></div>
+      <div class="domain-chip" data-tel="02 / SIGNAL: HIGH"><i data-lucide="scan-eye"></i><span>Computer Vision &amp; Medical Image Analysis</span></div>
+      <div class="domain-chip" data-tel="03 / SIGNAL: HIGH"><i data-lucide="layers-3"></i><span>Deep Learning &amp; Foundation Models</span></div>
+      <div class="domain-chip" data-tel="04 / SIGNAL: MED"><i data-lucide="dna"></i><span>Bioinformatics &amp; Genomic Sequences</span></div>
+      <div class="domain-chip" data-tel="05 / SIGNAL: MED"><i data-lucide="mouse-pointer-click"></i><span>Human-Computer Interaction (HCI)</span></div>
+      <div class="domain-chip" data-tel="06 / SIGNAL: HIGH"><i data-lucide="message-square-code"></i><span>Large Language Models &amp; Neuro-Symbolic Systems</span></div>
+      <div class="domain-chip" data-tel="07 / SIGNAL: MED"><i data-lucide="server-cog"></i><span>IT-Based Systems &amp; Low-Latency Architecture</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="section" id="research">
+  <div class="container">
+    <div class="eyebrow reveal">// Flagship Research — Undergraduate Thesis</div>
+    <h2 class="reveal">Neuro-Symbolic AI for Optical Biopsy-Level Polyp Diagnosis</h2>
+    <p class="lead reveal">Autonomous classification, calibrated risk prediction, and interpretable reasoning over live endoscopic video — combining real-time detection, segmentation, and consensus-based logic for colorectal cancer screening. 2025 – 2026.</p>
+
+    <div class="pipeline reveal">
+      <div class="pipe-stage"><div class="pipe-idx">STAGE 01</div><h4>Video Stream</h4><p>Live endoscopic feed ingested frame-by-frame for real-time analysis.</p></div>
+      <div class="pipe-stage"><div class="pipe-idx">STAGE 02</div><h4>YOLOv8 / RT-DETR Detection</h4><p>Real-time polyp detection using dual detector consensus.</p></div>
+      <div class="pipe-stage"><div class="pipe-idx">STAGE 03</div><h4>MedSAM2 Segmentation</h4><p>Pixel-level lesion segmentation for precise boundary extraction.</p></div>
+      <div class="pipe-stage"><div class="pipe-idx">STAGE 04</div><h4>Calibrated Risk &amp; Rationale</h4><p>Consensus-based reasoning delivers interpretable, calibrated diagnostic output.</p></div>
+    </div>
+
+    <div class="metric-row reveal">
+      <div class="metric-chip">&gt; 93.4% Classification Accuracy</div>
+      <div class="metric-chip">100% Detection Accuracy</div>
+      <div class="metric-chip">Calibrated Probabilities</div>
+      <div class="metric-chip">Consensus-Based Reasoning</div>
+    </div>
+
+    <div class="research-cta reveal">
+      <button class="btn btn-primary" onclick="openModal('research')"><i data-lucide="layers" style="width:15px;height:15px"></i> Open Technical Deep-Dive</button>
+      <a class="btn btn-ghost" href="https://drive.google.com/file/d/1oX-42jiq5bqX9PswhQmY1LE-fqXDj0ap/view?usp=sharing" target="_blank" rel="noopener"><i data-lucide="file-text" style="width:15px;height:15px"></i> Read Paper PDF</a>
+      <button class="btn btn-ghost" onclick="openModal('video')"><i data-lucide="play-circle" style="width:15px;height:15px"></i> Watch Live Overlay Demo</button>
+      <button class="btn btn-ghost" onclick="copyCitation(this)"><i data-lucide="quote" style="width:15px;height:15px"></i> Copy BibTeX Citation</button>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="container">
+    <div class="eyebrow reveal">// Systems &amp; Software</div>
+    <h2 class="reveal">Engineering Project Bento</h2>
+    <p class="lead reveal">Six shipped systems spanning language design, real-time collaboration, deep learning, and low-level systems programming.</p>
+
+    <div class="bento reveal" id="bentoGrid"></div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="section" id="credentials">
+  <div class="container">
+    <div class="eyebrow reveal">// Verified Documents</div>
+    <h2 class="reveal">Credential &amp; Document Lightbox</h2>
+    <p class="lead reveal">Academic transcripts, verified tutorship appointment letters, and certificates — previewable on-screen.</p>
+    <div class="cred-grid reveal" id="credGrid"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="eyebrow reveal">// Dispatch Console</div>
+    <h2 class="reveal">Get in Touch</h2>
+    <p class="lead reveal">Open to research collaborations, graduate opportunities, and engineering roles.</p>
+
+    <div class="contact-console reveal">
+      <div>
+        <div class="contact-line">
+          <span class="label">EMAIL</span>
+          <span class="value">tahsinraihanrobbani@gmail.com</span>
+          <button class="copy-btn" onclick="copyEmail(this)"><i data-lucide="copy" style="width:14px;height:14px"></i></button>
+        </div>
+        <div class="contact-line">
+          <span class="label">PHONE</span>
+          <span class="value">(+880) 1558216010</span>
+        </div>
+        <div class="contact-line">
+          <span class="label">LOCATION</span>
+          <span class="value">Rampura, Dhaka-1219, Bangladesh</span>
+        </div>
+        <div class="contact-line">
+          <span class="label">GITHUB</span>
+          <a class="value" href="https://github.com/TahsinRaihan" target="_blank" rel="noopener">github.com/TahsinRaihan ↗</a>
+        </div>
+        <div class="contact-line">
+          <span class="label">LINKEDIN</span>
+          <a class="value" href="https://linkedin.com/in/tahsinraihanrobbani" target="_blank" rel="noopener">linkedin.com/in/tahsinraihanrobbani ↗</a>
+        </div>
+      </div>
+      <div class="status-panel">
+        <div class="status-row"><span class="lit"></span> Research status: Active — Thesis in progress</div>
+        <div class="status-row"><span class="lit"></span> Tutorship: Live, Spring–Summer 2026</div>
+        <div class="status-row"><span class="lit"></span> Response time: within 24 hours</div>
+        <a class="btn btn-primary" href="mailto:tahsinraihanrobbani@gmail.com" style="justify-content:center;margin-top:10px;"><i data-lucide="send" style="width:15px;height:15px"></i> Send Email</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 TAHSIN RAIHAN ROBBANI · DHAKA, BANGLADESH</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalBody"></div>
+</div>
+
+<!-- COMMAND PALETTE -->
+<div class="cmdk-overlay" id="cmdkOverlay">
+  <div class="cmdk">
+    <input type="text" id="cmdkInput" placeholder="Jump to a section, project, or document…" autocomplete="off">
+    <div class="cmdk-list" id="cmdkList"></div>
+  </div>
+</div>
+
+<script>
+lucide.createIcons();
+
+/* ---------- Cursor spotlight ---------- */
+const spot = document.getElementById('spotlight');
+window.addEventListener('mousemove', e=>{
+  spot.style.setProperty('--x', e.clientX+'px');
+  spot.style.setProperty('--y', e.clientY+'px');
+});
+
+/* ---------- Scroll reveal ---------- */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('show'); io.unobserve(en.target); } });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ---------- Mobile dock active state ---------- */
+const dockLinks = document.querySelectorAll('.mobile-dock a');
+window.addEventListener('scroll', ()=>{
+  let cur='';
+  document.querySelectorAll('section[id], .hero[id]').forEach(sec=>{
+    if(window.scrollY >= sec.offsetTop - 140) cur = sec.id;
+  });
+  dockLinks.forEach(a=>{
+    a.classList.toggle('active', a.getAttribute('href') === '#'+cur);
+  });
+});
+
+/* ---------- Project data ---------- */
+const projects = [
+  {icon:'terminal-square', year:'2026', name:'Oi Mama — Banglish DSL Compiler', short:'A published Banglish domain-specific language letting you write and run code using everyday Bangladeshi slang.',
+   tags:['Python','AST','Lexer/Parser','PyPI','CLI'],
+   repo:'https://github.com/TahsinRaihan/oi-mama',
+   full:'Built and published a custom Banglish Domain-Specific Language live on PyPI, enabling code execution using everyday Bangladeshi slang. Designed a smart lexer and leveraged Python\'s AST engine to support OOP, async execution, and custom Banglish error reporting.',
+   demo:'$ pip install oi-mama\\n$ oi-mama run script.oim\\n> ভাই কোড চলতেছে... ✅ output: 42'},
+  {icon:'hand', year:'2026', name:'Gesture Board', short:'A low-latency, real-time collaborative whiteboard controlled entirely by hand gestures.',
+   tags:['React','Supabase','MediaPipe','Vercel'],
+   repo:'https://github.com/TahsinRaihan/Gesture-Board',
+   full:'Engineered a low-latency multi-user whiteboard deployed on Vercel with touchless gesture-based drawing and navigation. Implemented continuous spatial coordinate mapping using MediaPipe hand tracking for real-time interaction.'},
+  {icon:'dna', year:'2026', name:'Multi-Cancer Classification', short:'A CNN transfer-learning pipeline classifying cancer typologies from genomic sequence data.',
+   tags:['PyTorch','Torchvision','CNN','Transfer Learning'],
+   repo:'https://github.com/TahsinRaihan/multi-cancer-classification',
+   full:'Built a deep learning pipeline using CNNs and transfer learning to classify cancer typologies from genomic sequence datasets. Tuned hyperparameters and data augmentation strategies to optimize multiclass classification accuracy and model generalization.'},
+  {icon:'hard-drive', year:'2024', name:'VSFS Metadata Journaling', short:'A crash-consistent, write-ahead journaling engine for a virtual POSIX file system in C.',
+   tags:['C','Systems Programming','POSIX'],
+   repo:'https://github.com/TahsinRaihan/metadata-journaling-fs',
+   full:'Engineered a write-ahead metadata journaling system for a virtual file system (VSFS) to ensure crash consistency. Implemented atomic transaction logging and automated recovery mechanisms to prevent inode and bitmap corruption upon failure.'},
+  {icon:'utensils', year:'2024', name:'UniEats — Campus Food Platform', short:'A campus food ordering platform with responsive frontend logic and optimized database querying.',
+   tags:['Svelte','TypeScript','PLpgSQL'],
+   repo:'https://github.com/TahsinRaihan/UniEats',
+   full:'Developed a campus-focused food ordering platform featuring responsive Svelte frontend logic and optimized database querying for a smooth ordering experience.'},
+  {icon:'swords', year:'2023', name:'Zombie Survival Game', short:'An OpenGL survival game engine with custom 2D/3D collision detection and pathfinding AI.',
+   tags:['Python','OpenGL','AI Pathfinding'],
+   repo:'https://github.com/TahsinRaihan/Zombie-Survival',
+   full:'Programmed an interactive survival game featuring custom 2D/3D collision detection, dynamic enemy pathfinding AI, and resource management systems built from scratch in OpenGL.'},
+];
+
+const bento = document.getElementById('bentoGrid');
+projects.forEach((p,i)=>{
+  const el = document.createElement('div');
+  el.className='card proj-card';
+  el.style.cursor='pointer';
+  el.onclick = ()=>window.open(p.repo,'_blank','noopener');
+  el.innerHTML = `
+    <div class="proj-top">
+      <div class="proj-icon"><i data-lucide="${p.icon}" style="width:18px;height:18px"></i></div>
+      <div class="proj-year mono">${p.year}</div>
+    </div>
+    <h4>${p.name}</h4>
+    <p>${p.short}</p>
+    <div class="tag-row">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    <div class="proj-actions">
+      <a class="proj-btn" href="${p.repo}" target="_blank" rel="noopener" onclick="event.stopPropagation();"><i data-lucide="github" style="width:13px;height:13px"></i> Source Code</a>
+      <button class="proj-btn proj-btn-ghost" onclick="event.stopPropagation(); openModal('project', ${i});">Expand Dossier <i data-lucide="arrow-up-right" style="width:13px;height:13px"></i></button>
+    </div>
+  `;
+  bento.appendChild(el);
+});
+lucide.createIcons();
+
+/* ---------- Credentials ---------- */
+const credentials = [
+  {icon:'file-badge-2', label:'BRAC University Grade Sheet', meta:'CGPA 3.83 / 4.00', file:'Tahsin Raihan Robbani_Gradesheet.pdf'},
+  {icon:'scroll-text', label:'HSC Academic Transcript', meta:'GPA 5.00 / 5.00', file:'Tahsin Raihan Robbani_HSC Transcript.pdf'},
+  {icon:'award', label:'HSC Institutional Testimonial', meta:'Notre Dame College', file:'Tahsin Raihan Robbani_HSC_Testimonial.pdf'},
+  {icon:'scroll-text', label:'SSC Academic Transcript', meta:'GPA 5.00 / 5.00', file:'Tahsin Raihan Robbani_SSC Transcript.pdf'},
+  {icon:'award', label:'SSC Institutional Testimonial', meta:'National Ideal School', file:'Tahsin Raihan Robbani_SSC Testimonial.pdf'},
+  {icon:'file-badge-2', label:'ST Appointment Verification', meta:'BRAC University CSE', file:'Tahsin Raihan Robbani_ST_Appointment.pdf'},
+];const credGrid = document.getElementById('credGrid');
+credentials.forEach((c,i)=>{
+  const el = document.createElement('div');
+  el.className='cred-item';
+  el.onclick = ()=>openModal('cred', i);
+  el.innerHTML = `<i data-lucide="${c.icon}" style="width:26px;height:26px"></i><span>${c.label}</span>`;
+  credGrid.appendChild(el);
+});
+
+/* ---------- Modal system ---------- */
+const overlay = document.getElementById('modalOverlay');
+const modalBody = document.getElementById('modalBody');
+
+function openModal(type, payload){
+  let html = '';
+  if(type==='project'){
+    const p = projects[payload];
+    html = `
+      <button class="modal-close" onclick="closeModal()"><i data-lucide="x" style="width:20px;height:20px"></i></button>
+      <div class="modal-meta">PROJECT DOSSIER · ${p.year}</div>
+      <h3>${p.name}</h3>
+      <p>${p.full}</p>
+      <div class="tag-row" style="margin-bottom:16px;">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      ${p.demo ? `<div class="mono" style="background:rgba(0,0,0,.4);border:1px solid var(--line);border-radius:10px;padding:16px;font-size:.78rem;color:var(--emerald);white-space:pre-wrap;margin-bottom:16px;">${p.demo}</div>` : ''}
+      <a class="btn btn-primary" href="${p.repo}" target="_blank" rel="noopener"><i data-lucide="github" style="width:15px;height:15px"></i> Source Code · GitHub</a>
+    `;
+  } else if(type==='video'){
+    html = `
+      <button class="modal-close" onclick="closeModal()"><i data-lucide="x" style="width:20px;height:20px"></i></button>
+      <div class="modal-meta">LIVE INFERENCE PREVIEW · ENDOSCOPIC STREAM</div>
+      <h3>Real-Time Detection &amp; Segmentation Overlay</h3>
+      <p>Simulated real-time bounding-box and segmentation overlay from the neuro-symbolic diagnostic pipeline. Open the full video record for the complete run.</p>
+      <div class="video-sim">
+        <div class="video-scan"></div>
+        <div class="video-box" style="top:38%;left:44%;width:110px;height:80px;"><span>Polyp · 96%</span></div>
+        <div class="video-hud">
+          <span>REC ●</span><span>FRAME 0142</span><span>CONSENSUS: YOLOv8+RT-DETR</span>
+        </div>
+      </div>
+      <a class="btn btn-primary" style="margin-top:18px;" href="https://drive.google.com/file/d/1BXHSVKRXL8J-tRi70bs6pjRoyK4T1p8y/view?usp=sharing" target="_blank" rel="noopener"><i data-lucide="external-link" style="width:15px;height:15px"></i> Open Full Video Record</a>
+    `;
+  } else if(type==='research'){
+    html = `
+      <button class="modal-close" onclick="closeModal()"><i data-lucide="x" style="width:20px;height:20px"></i></button>
+      <div class="modal-meta">TECHNICAL DEEP-DIVE · UNDERGRADUATE THESIS</div>
+      <h3>Neuro-Symbolic AI for Optical Biopsy-Level Polyp Diagnosis</h3>
+      <p>Built a multi-stage neuro-symbolic AI framework combining real-time detection models (YOLOv8, RT-DETR) and segmentors (MedSAM2) to analyze endoscopic video for colorectal cancer screening.</p>
+      <p>Achieved over 93% classification accuracy by incorporating consensus-based detection and calibrated probability models to deliver interpretable, real-time diagnostic risk assessments.</p>
+      <ul>
+        <li>Dual-detector consensus (YOLOv8 + RT-DETR) for robust real-time localization</li>
+        <li>MedSAM2-driven pixel-level lesion segmentation</li>
+        <li>SimCLR-based representation learning for calibration</li>
+        <li>Interpretable rationale generation alongside every prediction</li>
+      </ul>
+      <div class="tag-row"><span class="tag">Python</span><span class="tag">YOLOv8</span><span class="tag">RT-DETR</span><span class="tag">MedSAM2</span><span class="tag">SimCLR</span></div>
+    `;
+  } else if(type==='cred'){
+    const c = credentials[payload];
+    const src = encodeURI('./files/' + c.file);
+    html = `
+      <button class="modal-close" onclick="closeModal()"><i data-lucide="x" style="width:20px;height:20px"></i></button>
+      <div class="modal-meta">DOCUMENT PREVIEW · ${c.meta}</div>
+      <h3>${c.label}</h3>
+      <div class="doc-viewer">
+        <object data="${src}" type="application/pdf">
+          <iframe src="${src}" title="${c.label}"></iframe>
+        </object>
+      </div>
+      <div class="research-cta" style="margin-top:16px;">
+        <a class="btn btn-primary" href="${src}" download="${c.file}"><i data-lucide="download" style="width:15px;height:15px"></i> Download PDF</a>
+        <a class="btn btn-ghost" href="${src}" target="_blank" rel="noopener"><i data-lucide="external-link" style="width:15px;height:15px"></i> Open in New Tab</a>
+      </div>
+      <p class="mono" style="font-size:.68rem;color:var(--text-low);margin-top:14px;">Expected path: /files/${c.file}</p>
+    `;
+  }
+  modalBody.innerHTML = html;
+  lucide.createIcons();
+  overlay.classList.add('open');
+}
+function closeModal(){ overlay.classList.remove('open'); }
+overlay.addEventListener('click', e=>{ if(e.target===overlay) closeModal(); });
+
+/* ---------- Command palette ---------- */
+const cmdkOverlay = document.getElementById('cmdkOverlay');
+const cmdkInput = document.getElementById('cmdkInput');
+const cmdkList = document.getElementById('cmdkList');
+
+const cmdItems = [
+  {label:'Home', cat:'Section', action:()=>scrollTo('hero')},
+  {label:'Work & Experience', cat:'Section', action:()=>scrollTo('tutor')},
+  {label:'Academic Results & Pedigree', cat:'Section', action:()=>scrollTo('academic')},
+  {label:'Research Interests', cat:'Section', action:()=>scrollTo('domains')},
+  {label:'Research: Polyp Diagnosis', cat:'Section', action:()=>scrollTo('research')},
+  {label:'Projects', cat:'Section', action:()=>scrollTo('projects')},
+  {label:'Credentials', cat:'Section', action:()=>scrollTo('credentials')},
+  {label:'Contact', cat:'Section', action:()=>scrollTo('contact')},
+  ...projects.map((p,i)=>({label:p.name, cat:'Project', action:()=>openModal('project', i)})),
+  ...credentials.map((c,i)=>({label:c.label, cat:'Document', action:()=>openModal('cred', i)})),
+  {label:'Read Thesis Paper PDF', cat:'Document', action:()=>window.open('https://drive.google.com/file/d/1oX-42jiq5bqX9PswhQmY1LE-fqXDj0ap/view?usp=sharing','_blank')},
+  {label:'Watch Live Overlay Demo', cat:'Document', action:()=>openModal('video')},
+  {label:'Copy BibTeX Citation', cat:'Action', action:()=>{ const btn=document.createElement('button'); copyCitation(btn); }},
+  {label:'Email: tahsinraihanrobbani@gmail.com', cat:'Contact', action:()=>window.location.href='mailto:tahsinraihanrobbani@gmail.com'},
+  {label:'GitHub Profile', cat:'Link', action:()=>window.open('https://github.com/TahsinRaihan','_blank')},
+  {label:'LinkedIn Profile', cat:'Link', action:()=>window.open('https://linkedin.com/in/tahsinraihanrobbani','_blank')},
+];
+function scrollTo(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+
+let selIdx = 0;
+function renderCmdk(filter=''){
+  const items = cmdItems.filter(i=>i.label.toLowerCase().includes(filter.toLowerCase()));
+  cmdkList.innerHTML = items.map((i,idx)=>`
+    <div class="cmdk-item ${idx===selIdx?'sel':''}" data-idx="${idx}">
+      <i data-lucide="chevron-right" style="width:14px;height:14px"></i> ${i.label}
+      <span class="k-cat">${i.cat}</span>
+    </div>`).join('') || `<div class="cmdk-item">No results</div>`;
+  lucide.createIcons();
+  cmdkList.querySelectorAll('.cmdk-item').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      const idx = el.dataset.idx;
+      if(idx!==undefined){ items[idx].action(); closeCmdk(); }
+    });
+  });
+  cmdkList._items = items;
+}
+function openCmdk(){ cmdkOverlay.classList.add('open'); cmdkInput.value=''; selIdx=0; renderCmdk(); cmdkInput.focus(); }
+function closeCmdk(){ cmdkOverlay.classList.remove('open'); }
+document.getElementById('openCmdk').addEventListener('click', openCmdk);
+cmdkOverlay.addEventListener('click', e=>{ if(e.target===cmdkOverlay) closeCmdk(); });
+cmdkInput.addEventListener('input', ()=>{ selIdx=0; renderCmdk(cmdkInput.value); });
+
+document.addEventListener('keydown', e=>{
+  if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==='k'){ e.preventDefault(); cmdkOverlay.classList.contains('open') ? closeCmdk() : openCmdk(); }
+  if(e.key==='Escape'){ closeCmdk(); closeModal(); }
+  if(cmdkOverlay.classList.contains('open')){
+    const items = cmdkList._items || [];
+    if(e.key==='ArrowDown'){ e.preventDefault(); selIdx=Math.min(selIdx+1, items.length-1); renderCmdk(cmdkInput.value); }
+    if(e.key==='ArrowUp'){ e.preventDefault(); selIdx=Math.max(selIdx-1, 0); renderCmdk(cmdkInput.value); }
+    if(e.key==='Enter' && items[selIdx]){ items[selIdx].action(); closeCmdk(); }
+  }
+});
+
+/* ---------- Copy email ---------- */
+function copyEmail(btn){
+  navigator.clipboard.writeText('tahsinraihanrobbani@gmail.com').then(()=>{
+    const original = btn.innerHTML;
+    btn.innerHTML = '<i data-lucide="check" style="width:14px;height:14px"></i>';
+    lucide.createIcons();
+    setTimeout(()=>{ btn.innerHTML = original; lucide.createIcons(); }, 1500);
+  });
+}
+
+/* ---------- Citation copy ---------- */
+const bibtex = `@thesis{robbani2026neurosymbolic,
+  title     = {Neuro-Symbolic AI for Optical Biopsy-Level Polyp Diagnosis:
+               Autonomous Classification, Risk Prediction, and Interpretable
+               Reasoning in Endoscopic Video},
+  author    = {Robbani, Tahsin Raihan and Rivan, Md. Ahanaf Hasan and
+               Huda, Samura and Farzana, Atkiya and Rahi, Iftekhar Hossain},
+  year      = {2026},
+  school    = {Brac University},
+  department= {Department of Computer Science and Engineering},
+  type      = {B.Sc. Thesis},
+  month     = {June},
+  supervisor= {Dr. Swakkhar Shatabda},
+  cosupervisor = {Dr. Md. Golam Rabiul Alam}
+}`;
+function copyCitation(btn){
+  navigator.clipboard.writeText(bibtex).then(()=>{
+    const original = btn.innerHTML;
+    btn.innerHTML = '<i data-lucide="check" style="width:15px;height:15px"></i> Citation Copied';
+    lucide.createIcons();
+    setTimeout(()=>{ btn.innerHTML = original; lucide.createIcons(); }, 1800);
+  });
+}
+
+/* ---------- CV download ---------- */
+document.getElementById('downloadCv').addEventListener('click', e=>{
+  e.preventDefault();
+  const link = document.createElement('a');
+  link.href = './files/Tahsin Raihan Robbani_CV.pdf';
+  link.download = 'Tahsin Raihan Robbani_CV.pdf';
+  link.click();
+});
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tahsin Raihan Robbani — CSE Researcher &amp; Systems Engineer</title>
+<title>Tahsin Raihan Robbani</title>
 <meta name="description" content="Portfolio of Tahsin Raihan Robbani — BRAC University CSE, Student Tutor, Neuro-Symbolic AI researcher.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -92,6 +92,12 @@ a{color:inherit;text-decoration:none;}
 .kbd-btn:hover{border-color:var(--line-strong);color:var(--cyan);}
 .kbd-btn kbd{background:rgba(255,255,255,.06);padding:1px 6px;border-radius:4px;border:1px solid var(--line);}
 @media (max-width:860px){.nav-links{display:none;}}
+@media (max-width:520px){
+  .topbar{padding:12px 14px;}
+  .brand{font-size:.68rem;gap:6px;}
+  .kbd-btn{padding:6px 8px;font-size:.68rem;}
+  .kbd-btn kbd{display:none;}
+}
 
 /* Mobile dock */
 .mobile-dock{
@@ -101,7 +107,10 @@ a{color:inherit;text-decoration:none;}
 }
 .mobile-dock a{padding:10px;border-radius:14px;color:var(--text-mid);display:flex;}
 .mobile-dock a.active,.mobile-dock a:hover{color:var(--cyan);background:rgba(0,245,255,.08);}
-@media (max-width:860px){.mobile-dock{display:flex;} body{padding-bottom:20px;}}
+@media (max-width:860px){.mobile-dock{display:flex;}}
+body{padding-bottom:20px;}
+@media (max-width:768px){ body{padding-bottom:100px !important;} }
+.contact-line .value, .contact-line a.value, .modal p, .st-meta, .pipe-stage p, .proj-card p{word-break:break-word;overflow-wrap:anywhere;}
 
 /* Hero */
 .hero{
@@ -119,13 +128,13 @@ a{color:inherit;text-decoration:none;}
   -webkit-background-clip:text;background-clip:text;color:transparent;
 }
 .hero p.sub{color:var(--text-mid);font-size:1.08rem;max-width:520px;line-height:1.65;margin-bottom:30px;}
-.badge-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:34px;}
+.badge-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;}
 .badge{
   display:flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:.74rem;
   border:1px solid var(--line);background:var(--glass);padding:7px 12px;border-radius:99px;color:var(--text-mid);
 }
 .badge .lit{width:6px;height:6px;border-radius:50%;background:var(--emerald);box-shadow:0 0 8px var(--emerald);}
-.cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+.cta-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px;}
 .btn{
   font-family:var(--font-mono);font-size:.82rem;padding:13px 22px;border-radius:10px;
   display:inline-flex;align-items:center;gap:8px;cursor:pointer;transition:.25s;border:1px solid transparent;
@@ -137,26 +146,49 @@ a{color:inherit;text-decoration:none;}
 
 .hero-portrait{position:relative;justify-self:center;}
 .portrait-frame{
-  position:relative;width:290px;height:360px;border-radius:18px;overflow:hidden;
+  position:relative;width:290px;height:360px;border-radius:16px;overflow:hidden;
   border:1px solid var(--line-strong);
   box-shadow:0 0 0 1px rgba(0,245,255,.05), 0 30px 80px rgba(0,0,0,.6);
 }
 .portrait-frame img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.05);}
 .portrait-frame::after{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,transparent 60%, rgba(3,7,18,.85));
+  background:linear-gradient(180deg,transparent 65%, rgba(3,7,18,.55));
 }
-.portrait-tag{
-  position:absolute;bottom:14px;left:14px;right:14px;z-index:2;
-  font-family:var(--font-mono);font-size:.68rem;color:var(--text-mid);
-  display:flex;justify-content:space-between;
+
+/* Quick contact ribbon */
+.quick-ribbon{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:30px;}
+.quick-chip{
+  display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:.72rem;
+  border:1px solid var(--line);background:rgba(15,23,42,.35);padding:6px 12px;border-radius:8px;color:var(--text-mid);
+  transition:.2s;
 }
-.portrait-tag b{color:var(--emerald);}
-.corner{position:absolute;width:18px;height:18px;border-color:var(--cyan);opacity:.85;z-index:3;}
-.corner.tl{top:8px;left:8px;border-top:2px solid;border-left:2px solid;}
-.corner.tr{top:8px;right:8px;border-top:2px solid;border-right:2px solid;}
-.corner.bl{bottom:8px;left:8px;border-bottom:2px solid;border-left:2px solid;}
-.corner.br{bottom:8px;right:8px;border-bottom:2px solid;border-right:2px solid;}
+.quick-chip:hover{border-color:var(--line-strong);color:var(--text-hi);}
+.quick-chip button.copy-inline{background:none;border:none;color:var(--text-low);cursor:pointer;display:flex;padding:0;margin-left:2px;}
+.quick-chip button.copy-inline:hover{color:var(--cyan);}
+
+/* Research interest pillars */
+.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+@media (max-width:900px){.pillar-grid{grid-template-columns:1fr;}}
+.pillar-card{border:1px solid var(--line);background:var(--glass);border-radius:16px;padding:28px;transition:.3s;position:relative;overflow:hidden;}
+.pillar-card:hover{border-color:var(--cyan);box-shadow:0 0 26px rgba(0,245,255,.1);transform:translateY(-3px);}
+.pillar-num{font-family:var(--font-mono);font-size:.68rem;color:var(--text-low);letter-spacing:.1em;}
+.pillar-card h4{font-family:var(--font-display);font-size:1.15rem;margin:10px 0 14px;color:var(--text-hi);}
+.pillar-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.pillar-tags span{font-family:var(--font-mono);font-size:.7rem;color:var(--emerald);border:1px solid rgba(16,185,129,.3);background:rgba(16,185,129,.06);padding:5px 10px;border-radius:99px;}
+
+/* Compact document list */
+.doc-list{display:flex;flex-direction:column;gap:12px;}
+.doc-row{
+  display:flex;align-items:center;gap:16px;border:1px solid var(--line);background:var(--glass);
+  border-radius:12px;padding:16px 20px;transition:.25s;flex-wrap:wrap;
+}
+.doc-row:hover{border-color:var(--line-strong);}
+.doc-row .doc-icon{width:36px;height:36px;border-radius:9px;background:rgba(0,245,255,.08);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--cyan);flex-shrink:0;}
+.doc-row .doc-info{flex:1;min-width:180px;}
+.doc-row .doc-title{font-family:var(--font-display);font-size:.95rem;color:var(--text-hi);}
+.doc-row .doc-meta-badge{display:inline-block;margin-top:4px;font-family:var(--font-mono);font-size:.66rem;color:var(--emerald);border:1px solid rgba(16,185,129,.3);background:rgba(16,185,129,.06);padding:3px 9px;border-radius:99px;}
+.doc-row .doc-actions{display:flex;gap:8px;flex-wrap:wrap;}
 
 /* Glass card base */
 .card{
@@ -179,6 +211,7 @@ a{color:inherit;text-decoration:none;}
   position:relative;
 }
 @media (max-width:860px){.st-spotlight{grid-template-columns:1fr;}}
+@media (max-width:768px){.st-spotlight{grid-template-columns:1fr !important;}}
 .st-left{padding:44px;}
 .st-right{padding:44px;border-left:1px solid var(--line);}
 @media (max-width:860px){.st-right{border-left:none;border-top:1px solid var(--line);}}
@@ -271,6 +304,8 @@ a{color:inherit;text-decoration:none;}
 .proj-btn:hover{border-color:var(--cyan);color:var(--cyan);}
 .proj-btn-ghost{color:var(--emerald);border-color:rgba(16,185,129,.3);}
 .proj-btn-ghost:hover{border-color:var(--emerald);color:var(--emerald);box-shadow:0 0 12px rgba(16,185,129,.15);}
+.proj-btn-primary{background:linear-gradient(90deg,var(--cyan),#0ea5c8);color:#001217;font-weight:600;border-color:transparent;flex:none;}
+.proj-btn-primary:hover{box-shadow:0 0 14px rgba(0,245,255,.3);color:#001217;}
 
 /* Timeline / academic */
 .timeline{border-left:1px solid var(--line);margin-left:8px;}
@@ -297,19 +332,28 @@ a{color:inherit;text-decoration:none;}
 
 /* Contact / footer */
 .contact-console{
-  display:grid;grid-template-columns:1.1fr .9fr;gap:40px;border:1px solid var(--line-strong);
+  display:grid;grid-template-columns:1.2fr 0.8fr;gap:32px;align-items:stretch;border:1px solid var(--line-strong);
   border-radius:20px;padding:48px;background:linear-gradient(135deg, rgba(0,245,255,.04), rgba(16,185,129,.03));
 }
-@media (max-width:820px){.contact-console{grid-template-columns:1fr;padding:32px;}}
-.contact-line{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px dashed var(--line);}
+@media (max-width:768px){
+  .contact-console{grid-template-columns:1fr;padding:32px;gap:24px;}
+  .contact-line .value, .contact-line a.value{word-break:break-word;}
+}
+.contact-left{display:flex;flex-direction:column;justify-content:center;}
+.contact-line{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px dashed var(--line);}
 .contact-line:last-child{border-bottom:none;}
-.contact-line .label{font-family:var(--font-mono);font-size:.72rem;color:var(--text-low);}
-.contact-line .value{font-family:var(--font-mono);font-size:.88rem;color:var(--text-hi);}
+.contact-line .label{font-family:var(--font-mono);font-size:.72rem;color:var(--text-low);min-width:90px;flex-shrink:0;}
+.contact-line .value{font-family:var(--font-mono);font-size:.88rem;color:var(--text-hi);word-break:break-word;overflow-wrap:anywhere;}
+.contact-line .copy-btn{margin-left:auto;flex-shrink:0;}
 .copy-btn{border:1px solid var(--line);background:transparent;color:var(--text-mid);padding:6px 8px;border-radius:6px;cursor:pointer;}
 .copy-btn:hover{color:var(--cyan);border-color:var(--cyan);}
-.status-panel{display:flex;flex-direction:column;gap:14px;justify-content:center;}
+.status-panel{
+  background:rgba(3,7,18,.45);border:1px solid var(--line);border-radius:14px;padding:24px;
+  display:flex;flex-direction:column;justify-content:space-between;gap:14px;
+}
+.status-panel .status-items{display:flex;flex-direction:column;gap:14px;}
 .status-row{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:.8rem;color:var(--text-mid);}
-.status-row .lit{width:7px;height:7px;border-radius:50%;background:var(--emerald);box-shadow:0 0 8px var(--emerald);}
+.status-row .lit{width:7px;height:7px;border-radius:50%;background:var(--emerald);box-shadow:0 0 8px var(--emerald);flex-shrink:0;}
 footer{padding:36px 0;text-align:center;color:var(--text-low);font-family:var(--font-mono);font-size:.72rem;border-top:1px solid var(--line);position:relative;z-index:3;}
 
 /* Modal */
@@ -340,8 +384,6 @@ footer{padding:36px 0;text-align:center;color:var(--text-low);font-family:var(--
 .video-box span{position:absolute;top:-22px;left:0;font-family:var(--font-mono);font-size:.65rem;color:var(--emerald);background:rgba(3,7,18,.8);padding:2px 6px;border-radius:4px;}
 @keyframes boxPulse{0%,100%{opacity:.75;}50%{opacity:1;}}
 .video-hud{position:absolute;bottom:10px;left:10px;right:10px;display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.62rem;color:var(--cyan);opacity:.85;}
-.doc-viewer{width:100%;aspect-ratio:3/4;max-height:52vh;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#0a0e17;}
-.doc-viewer object,.doc-viewer iframe{width:100%;height:100%;border:none;}
 
 /* Command palette */
 .cmdk-overlay{
@@ -405,25 +447,29 @@ footer{padding:36px 0;text-align:center;color:var(--text-low);font-family:var(--
 <section class="hero" id="hero">
   <div class="container hero-grid">
     <div>
-      <div class="eyebrow">// CSE Undergraduate — BRAC University</div>
+      
       <h1>Tahsin Raihan<br><span class="grad">Robbani</span></h1>
-      <p class="sub">Computer Science &amp; Engineering researcher at BRAC University (CGPA 3.83/4.00) specializing in Neuro-Symbolic AI, Medical Computer Vision, and Systems Engineering. Published PyPI compiler developer and Student Tutor for Discrete Mathematics, dedicated to building interpretable, low-latency intelligent systems.</p>
+      <p class="sub">CSE undergraduate and Student Tutor at BRAC University with a strong enthusiasm for academic research. Passionate about exploring novel problems across artificial intelligence, systems, and interdisciplinary computing.</p>
       <div class="badge-row">
         <div class="badge"><span class="lit"></span> CGPA 3.83 / 4.00</div>
         <div class="badge"><span class="lit"></span> Verified Student Tutor · CSE230</div>
-        <div class="badge"><span class="lit"></span> Research Active — Thesis 2025–26</div>
+        
       </div>
       <div class="cta-row">
         <a class="btn btn-primary" href="#research"><i data-lucide="cpu" style="width:15px;height:15px"></i> View Research</a>
         <a class="btn btn-ghost" href="#contact"><i data-lucide="mail" style="width:15px;height:15px"></i> Contact Dispatch</a>
-        <a class="btn btn-ghost" id="downloadCv" href="#"><i data-lucide="download" style="width:15px;height:15px"></i> Download CV</a>
+        <a class="btn btn-ghost" href="./files/Tahsin%20Raihan%20Robbani_CV.pdf" download="Tahsin_Raihan_Robbani_CV.pdf" target="_blank" rel="noopener"><i data-lucide="download" style="width:15px;height:15px"></i> Download CV</a>
+      </div>
+      <div class="quick-ribbon">
+        <span class="quick-chip">✉ tahsinraihanrobbani@gmail.com <button class="copy-inline" onclick="copyEmail(this)"><i data-lucide="copy" style="width:12px;height:12px"></i></button></span>
+        <a class="quick-chip" href="https://github.com/TahsinRaihan" target="_blank" rel="noopener">⌥ github.com/TahsinRaihan</a>
+        <span class="quick-chip">✆ (+880) 1558216010</span>
+        <span class="quick-chip">⌖ Dhaka, Bangladesh</span>
       </div>
     </div>
     <div class="hero-portrait">
       <div class="portrait-frame" id="portraitFrame">
-        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
         <img src="./files/profile.jpg" alt="Tahsin Raihan Robbani" id="portraitImg">
-        <div class="portrait-tag"><span>ID// TRR-2026</span><span><b>●</b> ONLINE</span></div>
       </div>
     </div>
   </div>
@@ -432,9 +478,9 @@ footer{padding:36px 0;text-align:center;color:var(--text-low);font-family:var(--
 <!-- STUDENT TUTOR SPOTLIGHT -->
 <section class="section" id="tutor">
   <div class="container">
-    <div class="eyebrow reveal">// Tier-1 Credential</div>
+    <div class="eyebrow reveal">// Academic &amp; Teaching Experience</div>
     <h2 class="reveal">Work &amp; Experience</h2>
-    <p class="lead reveal">A competitively-appointed faculty role, not an extracurricular — official mentorship under the CSE department, spanning two consecutive terms.</p>
+    <p class="lead reveal">Appointed by the Department of Computer Science and Engineering, BRAC University for two consecutive terms (Spring 2026 &amp; Summer 2026).</p>
 
     <div class="st-spotlight reveal">
       <div class="st-left">
@@ -454,11 +500,11 @@ footer{padding:36px 0;text-align:center;color:var(--text-low);font-family:var(--
       </div>
       <div class="st-right">
         <ul class="pedagogy-list">
-          <li><i data-lucide="check-circle-2"></i> Competitively appointed by the CSE department to hold official tutoring authority for CSE230.</li>
-          <li><i data-lucide="check-circle-2"></i> Ran regular 1-on-1 and group consultation hours for undergraduate engineering students.</li>
-          <li><i data-lucide="check-circle-2"></i> Guided students through rigorous proofs, predicate logic, set theory, and graph theory algorithms.</li>
-          <li><i data-lucide="check-circle-2"></i> Formulated step-by-step problem-solving heuristics for recurring conceptual bottlenecks.</li>
-          <li><i data-lucide="check-circle-2"></i> Coordinated directly with course instructors to align sessions with lecture pace and pain points.</li>
+          <li><i data-lucide="check-circle-2"></i> Appointed by the CSE department across two consecutive semesters (Spring 2026 and Summer 2026) to provide official academic mentorship for CSE230.</li>
+          <li><i data-lucide="check-circle-2"></i> Mentored undergraduate students through core mathematical foundations, including predicate logic, formal proofs, set theory, and graph algorithms.</li>
+          <li><i data-lucide="check-circle-2"></i> Facilitated learning during laboratory sessions by simplifying programming problems, algorithmic concepts, and code debugging workflows.</li>
+          <li><i data-lucide="check-circle-2"></i> Conducted weekly group problem-solving sessions and 1-on-1 consultations to resolve complex conceptual bottlenecks.</li>
+          <li><i data-lucide="check-circle-2"></i> Coordinated directly with course faculty to identify cohort learning patterns and align review sessions with core syllabus milestones.</li>
         </ul>
       </div>
     </div>
@@ -468,7 +514,7 @@ footer{padding:36px 0;text-align:center;color:var(--text-low);font-family:var(--
 <!-- ACADEMIC / LEADERSHIP -->
 <section class="section" id="academic">
   <div class="container">
-    <div class="eyebrow reveal">// Academic Pedigree &amp; Leadership</div>
+    <div class="eyebrow reveal">// Academic Background &amp; Leadership</div>
     <h2 class="reveal">Prestigious Appointments &amp; History</h2>
 
     <div class="st-spotlight reveal" style="grid-template-columns:1.1fr .9fr;">
@@ -507,18 +553,32 @@ footer{padding:36px 0;text-align:center;color:var(--text-low);font-family:var(--
 <!-- RESEARCH INTERESTS -->
 <section class="section" id="domains">
   <div class="container">
-    <div class="eyebrow reveal">// 02. Research Interests &amp; Core Domains</div>
+    <div class="eyebrow reveal">// Research Interests &amp; Core Domains</div>
     <h2 class="reveal">Research Interests</h2>
     <p class="lead reveal">Cross-disciplinary interests spanning perception, reasoning, and the systems that make both run at scale.</p>
 
-    <div class="domain-grid reveal" id="domainGrid">
-      <div class="domain-chip" data-tel="01 / SIGNAL: HIGH"><i data-lucide="brain-circuit"></i><span>Artificial Intelligence</span></div>
-      <div class="domain-chip" data-tel="02 / SIGNAL: HIGH"><i data-lucide="scan-eye"></i><span>Computer Vision &amp; Medical Image Analysis</span></div>
-      <div class="domain-chip" data-tel="03 / SIGNAL: HIGH"><i data-lucide="layers-3"></i><span>Deep Learning &amp; Foundation Models</span></div>
-      <div class="domain-chip" data-tel="04 / SIGNAL: MED"><i data-lucide="dna"></i><span>Bioinformatics &amp; Genomic Sequences</span></div>
-      <div class="domain-chip" data-tel="05 / SIGNAL: MED"><i data-lucide="mouse-pointer-click"></i><span>Human-Computer Interaction (HCI)</span></div>
-      <div class="domain-chip" data-tel="06 / SIGNAL: HIGH"><i data-lucide="message-square-code"></i><span>Large Language Models &amp; Neuro-Symbolic Systems</span></div>
-      <div class="domain-chip" data-tel="07 / SIGNAL: MED"><i data-lucide="server-cog"></i><span>IT-Based Systems &amp; Low-Latency Architecture</span></div>
+    <div class="pillar-grid reveal" id="domainGrid">
+      <div class="pillar-card">
+        <div class="pillar-num">PILLAR 01</div>
+        <h4><i data-lucide="scan-eye" style="width:18px;height:18px;color:var(--cyan);vertical-align:-3px;margin-right:6px;"></i>Intelligent Perception &amp; Reasoning</h4>
+        <div class="pillar-tags">
+          <span>Computer Vision</span><span>Medical Image Analysis</span><span>Neuro-Symbolic Systems</span><span>Foundation Models</span>
+        </div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">PILLAR 02</div>
+        <h4><i data-lucide="server-cog" style="width:18px;height:18px;color:var(--cyan);vertical-align:-3px;margin-right:6px;"></i>Systems &amp; Foundations</h4>
+        <div class="pillar-tags">
+          <span>Low-Latency Architecture</span><span>Real-Time Systems</span><span>Discrete Mathematics &amp; Algorithms</span>
+        </div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">PILLAR 03</div>
+        <h4><i data-lucide="mouse-pointer-click" style="width:18px;height:18px;color:var(--cyan);vertical-align:-3px;margin-right:6px;"></i>Applied Computing</h4>
+        <div class="pillar-tags">
+          <span>Human-Computer Interaction (HCI)</span><span>Bioinformatics / Genomic Sequences</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -538,8 +598,8 @@ footer{padding:36px 0;text-align:center;color:var(--text-low);font-family:var(--
     </div>
 
     <div class="metric-row reveal">
-      <div class="metric-chip">&gt; 93.4% Classification Accuracy</div>
-      <div class="metric-chip">100% Detection Accuracy</div>
+      <div class="metric-chip">≥ 93.4% Diagnostic Accuracy</div>
+      <div class="metric-chip">High-Sensitivity Detection Benchmark</div>
       <div class="metric-chip">Calibrated Probabilities</div>
       <div class="metric-chip">Consensus-Based Reasoning</div>
     </div>
@@ -557,7 +617,7 @@ footer{padding:36px 0;text-align:center;color:var(--text-low);font-family:var(--
 <section class="section" id="projects">
   <div class="container">
     <div class="eyebrow reveal">// Systems &amp; Software</div>
-    <h2 class="reveal">Engineering Project Bento</h2>
+    <h2 class="reveal">Engineering Projects</h2>
     <p class="lead reveal">Six shipped systems spanning language design, real-time collaboration, deep learning, and low-level systems programming.</p>
 
     <div class="bento reveal" id="bentoGrid"></div>
@@ -570,19 +630,19 @@ footer{padding:36px 0;text-align:center;color:var(--text-low);font-family:var(--
     <div class="eyebrow reveal">// Verified Documents</div>
     <h2 class="reveal">Credential &amp; Document Lightbox</h2>
     <p class="lead reveal">Academic transcripts, verified tutorship appointment letters, and certificates — previewable on-screen.</p>
-    <div class="cred-grid reveal" id="credGrid"></div>
+    <div class="doc-list reveal" id="credGrid"></div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section class="section" id="contact">
   <div class="container">
-    <div class="eyebrow reveal">// Dispatch Console</div>
+    <div class="eyebrow reveal">// Contact &amp; Coordinates</div>
     <h2 class="reveal">Get in Touch</h2>
     <p class="lead reveal">Open to research collaborations, graduate opportunities, and engineering roles.</p>
 
     <div class="contact-console reveal">
-      <div>
+      <div class="contact-left">
         <div class="contact-line">
           <span class="label">EMAIL</span>
           <span class="value">tahsinraihanrobbani@gmail.com</span>
@@ -606,10 +666,12 @@ footer{padding:36px 0;text-align:center;color:var(--text-low);font-family:var(--
         </div>
       </div>
       <div class="status-panel">
-        <div class="status-row"><span class="lit"></span> Research status: Active — Thesis in progress</div>
-        <div class="status-row"><span class="lit"></span> Tutorship: Live, Spring–Summer 2026</div>
-        <div class="status-row"><span class="lit"></span> Response time: within 24 hours</div>
-        <a class="btn btn-primary" href="mailto:tahsinraihanrobbani@gmail.com" style="justify-content:center;margin-top:10px;"><i data-lucide="send" style="width:15px;height:15px"></i> Send Email</a>
+        <div class="status-items">
+          <div class="status-row"><span class="lit"></span> Research status: Active — Thesis in progress</div>
+          <div class="status-row"><span class="lit"></span> Tutorship: Live, Spring–Summer 2026</div>
+          <div class="status-row"><span class="lit"></span> Response time: within 24 hours</div>
+        </div>
+        <a class="btn btn-primary" href="mailto:tahsinraihanrobbani@gmail.com" style="justify-content:center;margin-top:24px;width:100%;"><i data-lucide="send" style="width:15px;height:15px"></i> Send Email</a>
       </div>
     </div>
   </div>
@@ -721,9 +783,20 @@ const credentials = [
 ];const credGrid = document.getElementById('credGrid');
 credentials.forEach((c,i)=>{
   const el = document.createElement('div');
-  el.className='cred-item';
-  el.onclick = ()=>openModal('cred', i);
-  el.innerHTML = `<i data-lucide="${c.icon}" style="width:26px;height:26px"></i><span>${c.label}</span>`;
+  el.className='doc-row';
+  const src = encodeURI('./files/' + c.file);
+  el.style.cursor='pointer';
+  el.onclick = ()=>window.open(src, '_blank');
+  el.innerHTML = `
+    <div class="doc-icon"><i data-lucide="${c.icon}" style="width:18px;height:18px"></i></div>
+    <div class="doc-info">
+      <div class="doc-title">${c.label}</div>
+      <span class="doc-meta-badge">${c.meta}</span>
+    </div>
+    <div class="doc-actions">
+      <a class="proj-btn proj-btn-primary" href="${src}" download="${c.file}" onclick="event.stopPropagation();"><i data-lucide="download" style="width:13px;height:13px"></i> Download PDF</a>
+    </div>
+  `;
   credGrid.appendChild(el);
 });
 
@@ -774,24 +847,6 @@ function openModal(type, payload){
       </ul>
       <div class="tag-row"><span class="tag">Python</span><span class="tag">YOLOv8</span><span class="tag">RT-DETR</span><span class="tag">MedSAM2</span><span class="tag">SimCLR</span></div>
     `;
-  } else if(type==='cred'){
-    const c = credentials[payload];
-    const src = encodeURI('./files/' + c.file);
-    html = `
-      <button class="modal-close" onclick="closeModal()"><i data-lucide="x" style="width:20px;height:20px"></i></button>
-      <div class="modal-meta">DOCUMENT PREVIEW · ${c.meta}</div>
-      <h3>${c.label}</h3>
-      <div class="doc-viewer">
-        <object data="${src}" type="application/pdf">
-          <iframe src="${src}" title="${c.label}"></iframe>
-        </object>
-      </div>
-      <div class="research-cta" style="margin-top:16px;">
-        <a class="btn btn-primary" href="${src}" download="${c.file}"><i data-lucide="download" style="width:15px;height:15px"></i> Download PDF</a>
-        <a class="btn btn-ghost" href="${src}" target="_blank" rel="noopener"><i data-lucide="external-link" style="width:15px;height:15px"></i> Open in New Tab</a>
-      </div>
-      <p class="mono" style="font-size:.68rem;color:var(--text-low);margin-top:14px;">Expected path: /files/${c.file}</p>
-    `;
   }
   modalBody.innerHTML = html;
   lucide.createIcons();
@@ -815,7 +870,7 @@ const cmdItems = [
   {label:'Credentials', cat:'Section', action:()=>scrollTo('credentials')},
   {label:'Contact', cat:'Section', action:()=>scrollTo('contact')},
   ...projects.map((p,i)=>({label:p.name, cat:'Project', action:()=>openModal('project', i)})),
-  ...credentials.map((c,i)=>({label:c.label, cat:'Document', action:()=>openModal('cred', i)})),
+  ...credentials.map((c,i)=>({label:c.label, cat:'Document', action:()=>window.open('./files/'+encodeURIComponent(c.file),'_blank')})),
   {label:'Read Thesis Paper PDF', cat:'Document', action:()=>window.open('https://drive.google.com/file/d/1oX-42jiq5bqX9PswhQmY1LE-fqXDj0ap/view?usp=sharing','_blank')},
   {label:'Watch Live Overlay Demo', cat:'Document', action:()=>openModal('video')},
   {label:'Copy BibTeX Citation', cat:'Action', action:()=>{ const btn=document.createElement('button'); copyCitation(btn); }},
@@ -892,15 +947,6 @@ function copyCitation(btn){
     setTimeout(()=>{ btn.innerHTML = original; lucide.createIcons(); }, 1800);
   });
 }
-
-/* ---------- CV download ---------- */
-document.getElementById('downloadCv').addEventListener('click', e=>{
-  e.preventDefault();
-  const link = document.createElement('a');
-  link.href = './files/Tahsin Raihan Robbani_CV.pdf';
-  link.download = 'Tahsin Raihan Robbani_CV.pdf';
-  link.click();
-});
 </script>
 </body>
 </html>

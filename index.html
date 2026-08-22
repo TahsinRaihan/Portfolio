@@ -470,6 +470,59 @@ footer{padding:36px 0;text-align:center;color:var(--text-low);font-family:var(--
 @media (prefers-reduced-motion: reduce){
   *{animation:none !important;transition:none !important;}
 }
+.modal {
+  color: var(--text-hi);
+  background: var(--void-2);
+}
+.modal h3, .modal h4 {
+  color: var(--text-hi);
+  font-weight: 600;
+}
+.modal p, .modal li {
+  color: var(--text-mid);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+.thesis-secure-img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--line-strong);
+  background: var(--void);
+  margin: 16px 0 24px 0;
+  user-select: none;
+  -webkit-user-drag: none;
+  display: block;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.dossier-card {
+  border: 1px solid var(--line);
+  background: var(--glass);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.dossier-section {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+.dossier-section:last-child {
+  border-bottom: none;
+}
+.dossier-section h4{font-family:var(--font-display);font-size:1.05rem;margin-bottom:10px;}
+.dossier-section .dossier-idx{font-family:var(--font-mono);font-size:.7rem;color:var(--cyan);letter-spacing:.06em;margin-bottom:6px;}
+.dossier-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+.dossier-gallery .thesis-secure-img{margin:0;}
+.risk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
+.risk-card{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--glass);}
+.risk-card .risk-tag{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.06em;padding:3px 8px;border-radius:6px;display:inline-block;margin-bottom:8px;}
+.risk-tag.high{color:#f87171;background:rgba(248,113,113,.12);}
+.risk-tag.medium{color:#fbbf24;background:rgba(251,191,36,.12);}
+.risk-tag.low{color:#34d399;background:rgba(52,211,153,.12);}
+.risk-tag.baseline{color:var(--text-mid);background:rgba(148,163,184,.12);}
+.risk-card .thesis-secure-img{margin:0 0 8px 0;}
+.risk-card p{margin-bottom:0;font-size:.8rem;}
 </style>
 </head>
 <body>
@@ -578,7 +631,7 @@ footer{padding:36px 0;text-align:center;color:var(--text-low);font-family:var(--
 <!-- RESEARCH -->
 <section class="section" id="research">
   <div class="container">
-    <div class="eyebrow reveal">// Flagship Research — Undergraduate Thesis</div>
+    <div class="eyebrow reveal">// Research — Undergraduate Thesis</div>
     <h2 class="reveal">Neuro-Symbolic AI for Optical Biopsy-Level Polyp Diagnosis</h2>
     <p class="lead reveal">Autonomous classification, calibrated risk prediction, and interpretable reasoning over live endoscopic video — combining real-time detection, segmentation, and consensus-based logic for colorectal cancer screening. 2025 – 2026.</p>
 
@@ -607,7 +660,7 @@ footer{padding:36px 0;text-align:center;color:var(--text-low);font-family:var(--
     </div>
 
     <div class="research-cta reveal">
-      <button class="btn btn-primary" onclick="openModal('research')"><i data-lucide="layers" style="width:15px;height:15px"></i> Open Technical Deep-Dive</button>
+      <button class="btn btn-primary" onclick="openModal('research')"><i data-lucide="file-search" style="width:15px;height:15px"></i> Explore Full Research & Results ↗</button>
       <a class="btn btn-ghost" href="https://drive.google.com/file/d/1oX-42jiq5bqX9PswhQmY1LE-fqXDj0ap/view?usp=sharing" target="_blank" rel="noopener"><i data-lucide="file-text" style="width:15px;height:15px"></i> Read Paper PDF</a>
       <button class="btn btn-ghost" onclick="openModal('video')"><i data-lucide="play-circle" style="width:15px;height:15px"></i> Watch Live Overlay Demo</button>
       <button class="btn btn-ghost" onclick="copyCitation(this)"><i data-lucide="quote" style="width:15px;height:15px"></i> Copy BibTeX Citation</button>
@@ -965,19 +1018,77 @@ function openModal(type, payload){
       <a class="btn btn-primary" style="margin-top:18px;" href="https://drive.google.com/file/d/1BXHSVKRXL8J-tRi70bs6pjRoyK4T1p8y/view?usp=sharing" target="_blank" rel="noopener"><i data-lucide="external-link" style="width:15px;height:15px"></i> Open Full Video Record</a>
     `;
   } else if(type==='research'){
+    const secImg = (src, alt) => `<img class="thesis-secure-img" src="${encodeURI(src)}" alt="${alt}" loading="lazy" oncontextmenu="return false;" draggable="false" style="user-select:none;" onerror="this.onerror=null;this.alt='${alt} — image unavailable';this.style.minHeight='140px';this.style.display='flex';this.style.alignItems='center';this.style.justifyContent='center';">`;
     html = `
       <button class="modal-close" onclick="closeModal()"><i data-lucide="x" style="width:20px;height:20px"></i></button>
-      <div class="modal-meta">TECHNICAL DEEP-DIVE · UNDERGRADUATE THESIS</div>
+      <div class="modal-meta">RESEARCH DOSSIER & BENCHMARKS · UNDERGRADUATE THESIS</div>
       <h3>Neuro-Symbolic AI for Optical Biopsy-Level Polyp Diagnosis</h3>
       <p>Built a multi-stage neuro-symbolic AI framework combining real-time detection models (YOLOv8, RT-DETR) and segmentors (MedSAM2) to analyze endoscopic video for colorectal cancer screening.</p>
       <p>Achieved over 93% classification accuracy by incorporating consensus-based detection and calibrated probability models to deliver interpretable, real-time diagnostic risk assessments.</p>
-      <ul>
-        <li>Dual-detector consensus (YOLOv8 + RT-DETR) for robust real-time localization</li>
-        <li>MedSAM2-driven pixel-level lesion segmentation</li>
-        <li>SimCLR-based representation learning for calibration</li>
-        <li>Interpretable rationale generation alongside every prediction</li>
-      </ul>
-      <div class="tag-row"><span class="tag">Python</span><span class="tag">YOLOv8</span><span class="tag">RT-DETR</span><span class="tag">MedSAM2</span><span class="tag">SimCLR</span></div>
+      <div class="tag-row" style="margin-bottom:8px;"><span class="tag">Python</span><span class="tag">YOLOv8</span><span class="tag">RT-DETR</span><span class="tag">MedSAM2</span><span class="tag">SimCLR</span><span class="tag">K-Means</span></div>
+
+      <div class="dossier-section dossier-card">
+        <div class="dossier-idx">01 · SYSTEM ARCHITECTURE & PIPELINE</div>
+        <h4>End-to-End Framework Diagram</h4>
+        <p>The complete dual-stream analysis pipeline: parallel detector cascades (YOLOv8 + RT-DETR) feed consensus detections into MedSAM2 for pixel-level segmentation, while SimCLR-based representation learning drives K-Means clustering over lesion embeddings. A symbolic reasoning tree fuses these signals into a calibrated, interpretable risk verdict.</p>
+        ${secImg('./files/Thesis/PIPELINE_FInal-01.jpg', 'End-to-end neuro-symbolic pipeline diagram')}
+      </div>
+
+      <div class="dossier-section dossier-card">
+        <div class="dossier-idx">02 · UNSUPERVISED FEATURE CLUSTERING</div>
+        <h4>K-Means Distribution Map</h4>
+        <p>SimCLR embeddings projected and clustered into 8 distinct centers, each shown with a 2σ variance spread across the leading principal components — surfacing latent morphological groupings without label supervision.</p>
+        ${secImg('./files/Thesis/phase3_cluster_centers_detailed.jpg', 'K-Means cluster centers with 2 sigma variance spread')}
+      </div>
+
+      <div class="dossier-section dossier-card">
+        <div class="dossier-idx">03 · QUANTITATIVE BENCHMARKS</div>
+        <h4>Classification Performance & Evaluation Tables</h4>
+        <p>Full classification performance matrices alongside category-level accuracy distribution across the evaluated polyp classes.</p>
+        ${secImg('./files/Thesis/Accuracy table.png', 'Accuracy benchmark table')}
+        ${secImg('./files/Thesis/classification table.png', 'Classification performance table')}
+        ${secImg('./files/Thesis/accuracy_by_category.png', 'Accuracy by category distribution')}
+      </div>
+
+      <div class="dossier-section dossier-card">
+        <div class="dossier-idx">04 · QUALITATIVE VALIDATION</div>
+        <h4>Model Inference Montages & Confusion Matrix</h4>
+        <p>Frame-level inference montages across all evaluated models, validated against the aggregate confusion matrix.</p>
+        <div class="dossier-gallery">
+          ${secImg('./files/Thesis/frame_montage_all_models.jpg', 'Frame montage — all models, set 1')}
+          ${secImg('./files/Thesis/frame_montage_all_models (1).jpg', 'Frame montage — all models, set 2')}
+          ${secImg('./files/Thesis/frame_montage_all_models3.jpg', 'Frame montage — all models, set 3')}
+        </div>
+        ${secImg('./files/Thesis/confusion_matrix.png', 'Confusion matrix validation')}
+      </div>
+
+      <div class="dossier-section dossier-card">
+        <div class="dossier-idx">05 · CLINICAL RISK STRATIFICATION</div>
+        <h4>Risk Tier Cards & Negative Control</h4>
+        <p>Representative diagnostic outputs across each calibrated risk tier, plus a baseline negative-control sequence with no polyp present.</p>
+        <div class="risk-grid">
+          <div class="risk-card">
+            <span class="risk-tag high">HIGH RISK</span>
+            ${secImg('./files/Thesis/high risk.jpg', 'High risk — bleeding polyp analysis card')}
+            <p>Bleeding Polyp analysis card.</p>
+          </div>
+          <div class="risk-card">
+            <span class="risk-tag medium">MEDIUM RISK</span>
+            ${secImg('./files/Thesis/medium risk.jpg', 'Medium risk — flat polyp analysis card')}
+            <p>Flat Polyp analysis card.</p>
+          </div>
+          <div class="risk-card">
+            <span class="risk-tag low">LOW RISK</span>
+            ${secImg('./files/Thesis/low risk.jpg', 'Low risk — lifted polyp analysis card')}
+            <p>Lifted Polyp analysis card.</p>
+          </div>
+          <div class="risk-card">
+            <span class="risk-tag baseline">BASELINE CONTROL</span>
+            ${secImg('./files/Thesis/no polyp.jpg', 'Baseline control — negative mucosal sequence')}
+            <p>Negative control mucosal sequence.</p>
+          </div>
+        </div>
+      </div>
     `;
   }
   modalBody.innerHTML = html;

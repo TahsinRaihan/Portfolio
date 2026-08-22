@@ -606,12 +606,12 @@ footer{padding:36px 0;text-align:center;color:var(--text-low);font-family:var(--
           <div class="t-item">
             <div class="t-date">2019 – 2021</div>
             <h4>Notre Dame College, Dhaka</h4>
-            <p>Higher Secondary Certificate (HSC) — GPA 5.00 / 5.00</p>
+            <p>Higher Secondary Certificate (HSC) — <span class="cgpa-highlight">GPA 5.00 / 5.00</span></p>
           </div>
           <div class="t-item">
             <div class="t-date">2019</div>
             <h4>National Ideal School, Dhaka</h4>
-            <p>Secondary School Certificate (SSC) — GPA 5.00 / 5.00</p>
+            <p>Secondary School Certificate (SSC) — <span class="cgpa-highlight">GPA 5.00 / 5.00</span></p>
           </div>
         </div>
       </div>
@@ -631,9 +631,9 @@ footer{padding:36px 0;text-align:center;color:var(--text-low);font-family:var(--
 <!-- RESEARCH -->
 <section class="section" id="research">
   <div class="container">
-    <div class="eyebrow reveal">// Research — Undergraduate Thesis</div>
+    <div class="eyebrow reveal">// Research — Undergraduate Thesis (2025 – 2026)</div>
     <h2 class="reveal">Neuro-Symbolic AI for Optical Biopsy-Level Polyp Diagnosis</h2>
-    <p class="lead reveal">Autonomous classification, calibrated risk prediction, and interpretable reasoning over live endoscopic video — combining real-time detection, segmentation, and consensus-based logic for colorectal cancer screening. 2025 – 2026.</p>
+    <p class="lead reveal">An end-to-end neuro-symbolic framework for autonomous lesion classification, calibrated risk prediction, and interpretable reasoning over live endoscopic video feeds.</p>
 
     <div class="thesis-figure reveal">
       <div class="fig-stage"><div class="fig-icon"><i data-lucide="video" style="width:22px;height:22px"></i></div><span>DETECTION</span></div>
@@ -655,6 +655,8 @@ footer{padding:36px 0;text-align:center;color:var(--text-low);font-family:var(--
     <div class="metric-row reveal">
       <div class="metric-chip">≥ 93.4% Diagnostic Accuracy</div>
       <div class="metric-chip">High-Sensitivity Detection Benchmark</div>
+      <div class="metric-chip">Dual-Detector Consensus (YOLOv8 + RT-DETR)</div>
+      <div class="metric-chip">Patient-Level Split (n=349 Videos)</div>
       <div class="metric-chip">Calibrated Probabilities</div>
       <div class="metric-chip">Consensus-Based Reasoning</div>
     </div>
@@ -888,7 +890,7 @@ const projects = [
    tags:['PyTorch','Torchvision','CNN','Transfer Learning'],
    repo:'https://github.com/TahsinRaihan/multi-cancer-classification',
    thumb:'./files/Thumbnails/multi-cancer.png',
-   full:'Built a deep learning pipeline using CNNs and transfer learning to classify cancer typologies from genomic sequence datasets. Tuned hyperparameters and data augmentation strategies to optimize multiclass classification accuracy and model generalization.'},
+   full:'Built a transfer-learning CNN pipeline on RNA-Seq / Genomic sequence datasets for multi-class cancer typology classification, achieving balanced precision across held-out test splits with systematic hyperparameter tuning'},
   {icon:'swords', year:'2023', name:'Zombie Survival Game (OpenGL)', short:'An OpenGL survival game engine with custom 2D/3D collision detection and pathfinding AI.',
    tags:['Python','OpenGL','AI Pathfinding'],
    repo:'https://github.com/TahsinRaihan/Zombie-Survival',
@@ -1024,8 +1026,16 @@ function openModal(type, payload){
       <div class="modal-meta">RESEARCH DOSSIER & BENCHMARKS · UNDERGRADUATE THESIS</div>
       <h3>Neuro-Symbolic AI for Optical Biopsy-Level Polyp Diagnosis</h3>
       <p>Built a multi-stage neuro-symbolic AI framework combining real-time detection models (YOLOv8, RT-DETR) and segmentors (MedSAM2) to analyze endoscopic video for colorectal cancer screening.</p>
-      <p>Achieved over 93% classification accuracy by incorporating consensus-based detection and calibrated probability models to deliver interpretable, real-time diagnostic risk assessments.</p>
-      <div class="tag-row" style="margin-bottom:8px;"><span class="tag">Python</span><span class="tag">YOLOv8</span><span class="tag">RT-DETR</span><span class="tag">MedSAM2</span><span class="tag">SimCLR</span><span class="tag">K-Means</span></div>
+      <p>Evaluated across <strong>349 clinical endoscopic video sequences</strong> using a strictly partitioned <strong>patient/video-level 80/20 train/test split</strong> to ensure zero cross-frame test data leakage. Achieved <strong>≥ 93.4% multiclass diagnostic accuracy</strong>by incorporating consensus-based detection and calibrated probability models to deliver interpretable, real-time diagnostic risk assessments.</p>
+      <div class="tag-row" style="margin-bottom:14px;">
+        <span class="tag">n=349 Videos</span>
+        <span class="tag">Patient-Level Split (80/20)</span>
+        <span class="tag">YOLOv8</span>
+        <span class="tag">RT-DETR</span>
+        <span class="tag">MedSAM2</span>
+        <span class="tag">SimCLR</span>
+        <span class="tag">K-Means (K=8)</span>
+      </div>
 
       <div class="dossier-section dossier-card">
         <div class="dossier-idx">01 · SYSTEM ARCHITECTURE & PIPELINE</div>

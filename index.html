@@ -164,10 +164,11 @@ body{padding-bottom:20px;}
 }
 .badge .lit{width:6px;height:6px;border-radius:50%;background:var(--emerald);box-shadow:0 0 8px var(--emerald);}
 .badge-cgpa{
-  border:1px solid rgba(2,132,199,.4);background:linear-gradient(90deg, rgba(2,132,199,.12), rgba(5,150,105,.1));
-  color:var(--text-hi);font-weight:600;box-shadow:0 0 18px rgba(2,132,199,.12);
+  background:rgba(16,185,129,.12);border:1.5px solid var(--emerald);
+  color:var(--text-hi);font-weight:600;padding:8px 16px;border-radius:99px;
+  box-shadow:0 0 18px rgba(16,185,129,.18);
 }
-.badge-cgpa .lit{background:var(--cyan);box-shadow:0 0 10px var(--cyan);}
+.badge-cgpa .lit{background:var(--emerald);box-shadow:0 0 10px var(--emerald);}
 .cgpa-highlight{color:var(--cyan);font-weight:700;}
 .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:24px;}
 .btn{
@@ -324,22 +325,42 @@ html[data-theme="dark"] .btn-primary:hover{box-shadow:0 0 24px rgba(0,245,255,.3
 @media (max-width:760px){.thesis-figure{flex-direction:column;}.thesis-figure .fig-arrow{transform:rotate(90deg);}}
 
 /* Project thumbnail banner */
-.proj-thumb{
-  width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;position:relative;
-  background:linear-gradient(135deg, rgba(2,132,199,.12), rgba(5,150,105,.1));
-  border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+.proj-thumb-frame{width:100%;margin-bottom:14px;}
+.proj-thumb-img{
+  height:150px;width:100%;object-fit:cover;border-radius:10px;border:1px solid var(--line);
+  display:block;background:linear-gradient(135deg, rgba(2,132,199,.12), rgba(5,150,105,.1));
 }
-.proj-thumb::before{
-  content:'';position:absolute;inset:0;
-  background-image:linear-gradient(var(--line) 1px, transparent 1px),linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size:16px 16px;opacity:.5;
+.proj-hidden-item{display:none;}
+@keyframes projReveal{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+.toggle-container{
+  display:flex;justify-content:center;align-items:center;margin-top:48px;width:100%;
 }
-.proj-thumb i{position:relative;z-index:1;width:34px;height:34px;color:var(--cyan);}
+.toggle-btn{
+  display:inline-flex;align-items:center;gap:12px;padding:12px 26px;border-radius:9999px;
+  border:1px solid var(--line-strong);background:var(--glass);color:var(--text-hi);
+  font-family:var(--font-mono);font-size:.82rem;font-weight:500;cursor:pointer;
+  backdrop-filter:blur(12px);transition:all .25s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 4px 20px rgba(0,0,0,.05);
+}
+.toggle-btn:hover{
+  border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(0,245,255,.15);
+}
+.toggle-icon-wrap{
+  display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;
+  background:rgba(0,245,255,.1);color:var(--cyan);transition:transform .3s ease;
+}
+.toggle-btn:hover .toggle-icon-wrap{background:var(--cyan);color:#000;}
 
 /* Bento */
 .bento{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
 @media (max-width:900px){.bento{grid-template-columns:1fr 1fr;}}
 @media (max-width:600px){.bento{grid-template-columns:1fr;}}
+/* Center lone 7th card on 3-column desktop viewports */
+@media (min-width:901px){
+  .bento > .proj-card:nth-child(7):last-child{grid-column:2;}
+}
 .proj-card{display:flex;flex-direction:column;gap:14px;min-height:220px;}
 .proj-top{display:flex;justify-content:space-between;align-items:flex-start;}
 .proj-icon{width:38px;height:38px;border-radius:10px;background:rgba(0,245,255,.08);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--cyan);}
@@ -668,9 +689,17 @@ footer{padding:36px 0;text-align:center;color:var(--text-low);font-family:var(--
   <div class="container">
     <div class="eyebrow reveal">// Systems &amp; Software</div>
     <h2 class="reveal">Engineering Projects</h2>
-    <p class="lead reveal">Six shipped systems spanning language design, real-time collaboration, deep learning, and low-level systems programming.</p>
+    <p class="lead reveal">Production-grade architectures, published developer tooling, deep learning pipelines, and low-level systems engineered for high performance, scalability, and impact.</p>
 
     <div class="bento reveal" id="bentoGrid"></div>
+    <div class="toggle-container">
+      <button id="toggleProjectsBtn" class="toggle-btn" aria-expanded="false">
+        <span class="toggle-icon-wrap">
+          <i data-lucide="chevron-down" id="toggleIcon"></i>
+        </span>
+        <span id="toggleText" class="toggle-label">View more</span>
+      </button>
+    </div>
   </div>
 </section>
 
@@ -794,53 +823,111 @@ const projects = [
   {icon:'terminal-square', year:'2026', name:'Oi Mama — Banglish DSL Compiler', short:'A published Banglish domain-specific language letting you write and run code using everyday Bangladeshi slang.',
    tags:['Python','AST','Lexer/Parser','PyPI','CLI'],
    repo:'https://github.com/TahsinRaihan/oi-mama',
+   thumb:'./files/Thumbnails/oi-mama.png',
    full:'Built and published a custom Banglish Domain-Specific Language live on PyPI, enabling code execution using everyday Bangladeshi slang. Designed a smart lexer and leveraged Python\'s AST engine to support OOP, async execution, and custom Banglish error reporting.',
    demo:'$ pip install oi-mama\\n$ oi-mama run script.oim\\n> ভাই কোড চলতেছে... ✅ output: 42'},
-  {icon:'hand', year:'2026', name:'Gesture Board', short:'A low-latency, real-time collaborative whiteboard controlled entirely by hand gestures.',
+  {icon:'hand', year:'2026', name:'Gesture Board — Touchless Whiteboard', short:'A low-latency, real-time collaborative whiteboard controlled entirely by hand gestures.',
    tags:['React','Supabase','MediaPipe','Vercel'],
    repo:'https://github.com/TahsinRaihan/Gesture-Board',
+   thumb:'./files/Thumbnails/gesture-board.png',
    full:'Engineered a low-latency multi-user whiteboard deployed on Vercel with touchless gesture-based drawing and navigation. Implemented continuous spatial coordinate mapping using MediaPipe hand tracking for real-time interaction.'},
   {icon:'dna', year:'2026', name:'Multi-Cancer Classification', short:'A CNN transfer-learning pipeline classifying cancer typologies from genomic sequence data.',
    tags:['PyTorch','Torchvision','CNN','Transfer Learning'],
    repo:'https://github.com/TahsinRaihan/multi-cancer-classification',
+   thumb:'./files/Thumbnails/multi-cancer.png',
    full:'Built a deep learning pipeline using CNNs and transfer learning to classify cancer typologies from genomic sequence datasets. Tuned hyperparameters and data augmentation strategies to optimize multiclass classification accuracy and model generalization.'},
+  {icon:'swords', year:'2023', name:'Zombie Survival Game (OpenGL)', short:'An OpenGL survival game engine with custom 2D/3D collision detection and pathfinding AI.',
+   tags:['Python','OpenGL','AI Pathfinding'],
+   repo:'https://github.com/TahsinRaihan/Zombie-Survival',
+   thumb:'./files/Thumbnails/zombie-survival.png',
+   full:'Programmed an interactive survival game featuring custom 2D/3D collision detection, dynamic enemy pathfinding AI, and resource management systems built from scratch in OpenGL.'},
+  {icon:'layout-dashboard', year:'2026', name:'Universe — All-in-One Campus Ecosystem', short:'A unified digital ecosystem for university communities, consolidating library resource tracking, cafeteria services, and a peer-to-peer student marketplace.',
+   tags:['Next.js','React','Full-Stack','Vercel'],
+   repo:'https://github.com/TahsinRaihan/universe',
+   live:'https://universe-gray-sigma.vercel.app/',
+   thumb:'./files/Thumbnails/universe.png',
+   full:'A unified digital ecosystem for university communities, consolidating library resource tracking, cafeteria services, and a peer-to-peer student marketplace. Built with a full-stack Next.js and React architecture, deployed on Vercel, to bring together fragmented campus services under a single cohesive platform.'},
   {icon:'hard-drive', year:'2024', name:'VSFS Metadata Journaling', short:'A crash-consistent, write-ahead journaling engine for a virtual POSIX file system in C.',
    tags:['C','Systems Programming','POSIX'],
    repo:'https://github.com/TahsinRaihan/metadata-journaling-fs',
+   thumb:'./files/Thumbnails/vsfs-journaling.png',
    full:'Engineered a write-ahead metadata journaling system for a virtual file system (VSFS) to ensure crash consistency. Implemented atomic transaction logging and automated recovery mechanisms to prevent inode and bitmap corruption upon failure.'},
   {icon:'utensils', year:'2024', name:'UniEats — Campus Food Platform', short:'A campus food ordering platform with responsive frontend logic and optimized database querying.',
    tags:['Svelte','TypeScript','PLpgSQL'],
    repo:'https://github.com/TahsinRaihan/UniEats',
+   thumb:'./files/Thumbnails/unieats.png',
    full:'Developed a campus-focused food ordering platform featuring responsive Svelte frontend logic and optimized database querying for a smooth ordering experience.'},
-  {icon:'swords', year:'2023', name:'Zombie Survival Game', short:'An OpenGL survival game engine with custom 2D/3D collision detection and pathfinding AI.',
-   tags:['Python','OpenGL','AI Pathfinding'],
-   repo:'https://github.com/TahsinRaihan/Zombie-Survival',
-   full:'Programmed an interactive survival game featuring custom 2D/3D collision detection, dynamic enemy pathfinding AI, and resource management systems built from scratch in OpenGL.'},
 ];
 
+/* Render Projects */
 const bento = document.getElementById('bentoGrid');
-projects.forEach((p,i)=>{
+bento.innerHTML = '';
+
+projects.forEach((p, i) => {
   const el = document.createElement('div');
-  el.className='card proj-card';
-  el.style.cursor='pointer';
-  el.onclick = ()=>window.open(p.repo,'_blank','noopener');
+  const isHidden = i >= 6;
+  el.className = `card proj-card ${isHidden ? 'proj-hidden-item' : ''}`;
+  el.style.cursor = 'pointer';
+  if (isHidden) {
+    el.style.display = 'none';
+  }
+
+  // Direct destination logic: Universe opens live app, others open GitHub
+  const mainLink = (p.name.includes('Universe') && p.live) ? p.live : p.repo;
+  el.onclick = () => window.open(mainLink, '_blank', 'noopener');
+
   el.innerHTML = `
-    <div class="proj-thumb"><i data-lucide="${p.icon}"></i></div>
+    <div class="proj-thumb-frame">
+      <img src="${p.thumb}" alt="${p.name}" class="proj-thumb-img" loading="lazy">
+    </div>
     <div class="proj-top">
       <div class="proj-icon"><i data-lucide="${p.icon}" style="width:18px;height:18px"></i></div>
       <div class="proj-year mono">${p.year}</div>
     </div>
     <h4>${p.name}</h4>
     <p>${p.short}</p>
-    <div class="tag-row">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    <div class="tag-row">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
     <div class="proj-actions">
-      <a class="proj-btn" href="${p.repo}" target="_blank" rel="noopener" onclick="event.stopPropagation();"><i data-lucide="github" style="width:13px;height:13px"></i> Source Code</a>
-      <button class="proj-btn proj-btn-ghost" onclick="event.stopPropagation(); openModal('project', ${i});">Expand Dossier <i data-lucide="arrow-up-right" style="width:13px;height:13px"></i></button>
+      <a class="proj-btn" href="${mainLink}" target="_blank" rel="noopener" onclick="event.stopPropagation();">
+        <i data-lucide="${(p.name.includes('Universe') && p.live) ? 'external-link' : 'github'}" style="width:13px;height:13px"></i>
+        ${(p.name.includes('Universe') && p.live) ? 'Live App ↗' : 'Source Code'}
+      </a>
+      <button class="proj-btn proj-btn-ghost" onclick="event.stopPropagation(); openModal('project', ${i});">
+        Expand Dossier <i data-lucide="arrow-up-right" style="width:13px;height:13px"></i>
+      </button>
     </div>
   `;
   bento.appendChild(el);
 });
 lucide.createIcons();
+
+/* Toggle Button Logic */
+let isExpanded = false;
+const toggleBtn = document.getElementById('toggleProjectsBtn');
+const toggleText = document.getElementById('toggleText');
+const toggleIcon = document.getElementById('toggleIcon');
+const hiddenCards = document.querySelectorAll('.proj-hidden-item');
+
+if (toggleBtn && hiddenCards.length > 0) {
+  toggleText.textContent = `View more (${hiddenCards.length})`;
+  toggleBtn.onclick = () => {
+    isExpanded = !isExpanded;
+    hiddenCards.forEach(card => {
+      card.style.display = isExpanded ? 'flex' : 'none';
+    });
+    toggleText.textContent = isExpanded ? 'Show Less' : `View more (${hiddenCards.length})`;
+    toggleIcon.setAttribute('data-lucide', isExpanded ? 'chevron-up' : 'chevron-down');
+    toggleBtn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+    lucide.createIcons();
+
+    if (!isExpanded) {
+      document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+} else if (toggleBtn) {
+  toggleBtn.style.display = 'none';
+}
+
 
 /* ---------- Modal system ---------- */
 const overlay = document.getElementById('modalOverlay');
@@ -857,7 +944,10 @@ function openModal(type, payload){
       <p>${p.full}</p>
       <div class="tag-row" style="margin-bottom:16px;">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
       ${p.demo ? `<div class="mono" style="background:rgba(0,0,0,.4);border:1px solid var(--line);border-radius:10px;padding:16px;font-size:.78rem;color:var(--emerald);white-space:pre-wrap;margin-bottom:16px;">${p.demo}</div>` : ''}
-      <a class="btn btn-primary" href="${p.repo}" target="_blank" rel="noopener"><i data-lucide="github" style="width:15px;height:15px"></i> Source Code · GitHub</a>
+      <div class="research-cta" style="margin-top:6px;">
+        ${p.live ? `<a class="btn btn-primary" href="${p.live}" target="_blank" rel="noopener"><i data-lucide="external-link" style="width:15px;height:15px"></i> Live App ↗</a>` : ''}
+        <a class="btn ${p.live ? 'btn-ghost' : 'btn-primary'}" href="${p.repo}" target="_blank" rel="noopener"><i data-lucide="github" style="width:15px;height:15px"></i> Source Code · GitHub</a>
+      </div>
     `;
   } else if(type==='video'){
     html = `
